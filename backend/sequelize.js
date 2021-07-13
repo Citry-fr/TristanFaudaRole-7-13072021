@@ -15,7 +15,7 @@ const sequelize = new Sequelize('groupomania', 'root', '', {
 
 const User = UserModel(sequelize, Sequelize);
 
-sequelize.sync({})
+sequelize.sync({force: true})
     .then(() => {
         console.log('Database & tables created!');
     });

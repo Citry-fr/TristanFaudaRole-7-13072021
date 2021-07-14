@@ -12,7 +12,6 @@ exports.signup = (req, res, next) => {
                 password: hash
             }).then(user => res.json(user));
         }); 
-
 };
 
 exports.login = (req, res, next) => {
@@ -55,4 +54,19 @@ exports.deleteUser = (req, res, next) => {
                 .then(error => res.status(500).json({ error }));
         })
         .catch(error => res.status(400).json({ error }));
+}
+
+exports.modifyUser = (req, res, next) => {
+    User.findOne({where: {id: req.params.id}})
+        .then( user => {
+            const userObject = req.body;
+            bcrypt.hash(req.body.password, 10)
+                .then(hash => {
+                    user.update({
+                        ...userObject,
+                        password: hash
+                    }).then(user => res.json(user));
+                }); 
+        })
+    .catch(error => res.status(400).json({ error }));
 }

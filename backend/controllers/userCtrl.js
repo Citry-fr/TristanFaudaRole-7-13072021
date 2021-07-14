@@ -46,3 +46,13 @@ exports.login = (req, res, next) => {
 exports.getAllUsers = (req, res, next) => {
     User.findAll().then(users => res.status(200).json(users)).catch(error => res.status(500).json({ error }));
 }
+
+exports.deleteUser = (req, res, next) => {
+    User.findOne({where: {id: req.params.id}})
+        .then(user => {
+            User.destroy(user)
+                .then(res.status(200).json({message: 'Utilisateur Supprimé'}))
+                .then(error => res.status(500).json({ error }));
+        })
+        .catch(error => res.status(400).json({ error }));
+}

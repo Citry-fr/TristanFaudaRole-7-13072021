@@ -8,5 +8,6 @@ const admin = require('../middlewares/rankAdmin');
 router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);
 router.get('/', auth, admin, userCtrl.getAllUsers);
+router.delete('/:id', auth, admin, userCtrl.deleteUser);
 
 module.exports = router;

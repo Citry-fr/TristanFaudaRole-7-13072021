@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const UserModel = require('./models/user');
 const GifModel = require('./models/gif');
 const CommentModel = require('./models/comment');
+const gif = require('./models/gif');
 
 const sequelize = new Sequelize('groupomania', 'root', '', {
     host: 'localhost',
@@ -20,8 +21,13 @@ const Gif = GifModel(sequelize, Sequelize);
 const Comment = CommentModel(sequelize, Sequelize);
 
 User.hasMany(Gif);
+User.hasMany(Comment);
 
 Gif.belongsTo(User);
+//Gif.hasMany(Comment);
+
+/*Comment.belongsTo(User);
+Comment.hasOne(Gif);*/
 
 
 sequelize.sync({force: true})

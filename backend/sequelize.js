@@ -24,10 +24,9 @@ User.hasMany(Gif);
 User.hasMany(Comment);
 
 Gif.belongsTo(User);
-//Gif.hasMany(Comment);
+Gif.hasMany(Comment);
 
-/*Comment.belongsTo(User);
-Comment.hasOne(Gif);*/
+Comment.belongsTo(User);
 
 
 sequelize.sync({force: true})

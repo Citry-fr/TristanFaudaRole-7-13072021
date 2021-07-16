@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize');
 const UserModel = require('./models/user');
+const GifModel = require('./models/gif');
+const CommentModel = require('./models/comment');
 
 const sequelize = new Sequelize('groupomania', 'root', '', {
     host: 'localhost',
@@ -14,6 +16,9 @@ const sequelize = new Sequelize('groupomania', 'root', '', {
 });
 
 const User = UserModel(sequelize, Sequelize);
+const Gif = GifModel(sequelize, Sequelize);
+const Comment = CommentModel(sequelize, Sequelize);
+
 
 sequelize.sync({force: true})
     .then(() => {
@@ -21,5 +26,7 @@ sequelize.sync({force: true})
     });
 
 module.exports = {
-    User
+    User,
+    Gif,
+    Comment
 };

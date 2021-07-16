@@ -6,5 +6,6 @@ const auth = require('../middlewares/auth');
 
 router.post('/', auth, gifCtrl.postGif);
 router.get('/:userId', auth, gifCtrl.getUserGifs);
+router.get('/', auth, gifCtrl.getAllGifs);
 
 module.exports = router;

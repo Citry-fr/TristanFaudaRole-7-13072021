@@ -19,6 +19,10 @@ const User = UserModel(sequelize, Sequelize);
 const Gif = GifModel(sequelize, Sequelize);
 const Comment = CommentModel(sequelize, Sequelize);
 
+User.hasMany(Gif);
+
+Gif.belongsTo(User);
+
 
 sequelize.sync({force: true})
     .then(() => {

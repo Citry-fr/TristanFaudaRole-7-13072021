@@ -29,3 +29,14 @@ exports.deleteGif = (req, res, next) => {
                 .then(res.status(200).json({ message: "Gif et commentaires lié supprimé !"}));
         });
 }
+exports.modifyGif = (req, res, next) => {
+    Gif.update(
+        {
+            ...req.body
+        },
+        {
+            where: {id: req.params.gifId}
+        }
+    ).then(gif => res.status(200).json({ message: "Gif modifié !"}))
+     .catch(error => res.status(401).json({ error: error }));
+}

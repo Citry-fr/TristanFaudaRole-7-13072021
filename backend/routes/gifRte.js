@@ -4,8 +4,9 @@ const gifCtrl = require('../controllers/gifCtrl');
 
 const auth = require('../middlewares/auth');
 
-router.post('/', auth, gifCtrl.postGif);
-router.get('/:userId', auth, gifCtrl.getUserGifs);
-router.get('/', auth, gifCtrl.getAllGifs);
+router.post('/', gifCtrl.postGif);
+router.get('/:userId', gifCtrl.getUserGifs);
+router.get('/', gifCtrl.getAllGifs);
+router.delete('/:gifId', gifCtrl.deleteGif);
 
 module.exports = router;

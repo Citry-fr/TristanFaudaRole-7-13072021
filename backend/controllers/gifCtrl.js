@@ -21,3 +21,11 @@ exports.getAllGifs = (req, res, next) => {
         include: [User, Comment]
     }).then(gifs => res.json(gifs));
 }
+
+exports.deleteGif = (req, res, next) => {
+    Comment.destroy({where: {gifId: req.params.gifId}})
+        .then(() => {
+            Gif.destroy({where: {id: req.params.gifId}})
+                .then(res.status(200).json({ message: "Gif et commentaires lié supprimé !"}));
+        });
+}

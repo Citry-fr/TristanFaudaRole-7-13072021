@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 app.use('/api/auth', userRoutes);
 app.use('/api/gif', gifRoutes);
-app.use('/api/gif', comRoutes);
+app.use('/api/com', comRoutes);
 
 
 module.exports = app;

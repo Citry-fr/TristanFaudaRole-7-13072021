@@ -19,10 +19,7 @@ exports.modifyComment = (req, res, next) => {
         }).catch(error => res.status(400).json({ error }));
 }
 exports.deleteComment = (req, res, next) => {
-    Comment.findOne({ where: { id: req.params.comId }})
-        .then(com => {
-            com.destroy()
-                .then(res.status(200).json({ message: "Commentaire Supprimé !"}))
-                //.catch(error => res.status(500).json({ error }));
-        });
+    Comment.destroy({ where: { id: req.params.comId }})
+        .then(res.status(200).json({ message: "Commentaire Supprimé !"}))
+        .catch(error => res.status(500).json({ error }));
 }

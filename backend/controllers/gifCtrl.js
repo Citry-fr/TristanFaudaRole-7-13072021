@@ -1,12 +1,11 @@
 const {Gif, User, Comment} = require('../sequelize');
 
 exports.postGif = (req, res, next) => {
-    const gifObject = req.body;
-    Gif.create(        
-        {
-            ...gifObject
-        }
-    ).then(gif => res.json(gif));
+    const gif = new Gif({
+        ...req.body
+    });
+    Gif.create({...gif.dataValues})
+        .then(gif => res.json(gif));
 };
 
 exports.getUserGifs = (req, res, next) => {

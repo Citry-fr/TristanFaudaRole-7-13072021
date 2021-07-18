@@ -21,12 +21,13 @@ const Gif = GifModel(sequelize, Sequelize);
 const Comment = CommentModel(sequelize, Sequelize);
 
 User.hasMany(Gif);
-User.hasMany(Comment);
-
 Gif.belongsTo(User);
+
+User.hasMany(Comment);
 Gif.hasMany(Comment);
 
 Comment.belongsTo(User);
+Comment.belongsTo(Gif);
 
 
 sequelize.sync({force: true})

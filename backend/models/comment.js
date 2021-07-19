@@ -5,6 +5,11 @@ module.exports = (sequelize, type) => {
             primaryKey: true,
             autoIncrement: true
         },
-        text: type.STRING
+        text: type.STRING,
+        status: {
+            max: 1, //Accepté
+            min: 0, //En attente
+            type: type.INTEGER
+        }
     });
 };

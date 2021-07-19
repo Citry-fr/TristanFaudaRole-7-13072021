@@ -13,8 +13,8 @@ module.exports = (sequelize, type) => {
         firstName: type.STRING,
         lastName: type.STRING,
         rank: {
-            max: 1,
-            min: 0,
+            max: 1, //Admin
+            min: 0, //Membre
             type: type.INTEGER
         }
     });

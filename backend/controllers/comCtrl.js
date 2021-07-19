@@ -12,8 +12,8 @@ exports.postComment = (req, res, next) => {
 exports.modifyComment = (req, res, next) => {    
     Comment.update(
         {
-            ...req.body,
-            gifId: req.params.gifId
+            text: req.body.text,
+            status: 0
         },
         {
             where: {id: req.params.comId}

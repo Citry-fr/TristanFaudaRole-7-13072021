@@ -4,10 +4,10 @@ const GifModel = require('./models/gif');
 const CommentModel = require('./models/comment');
 const gif = require('./models/gif');
 
-const sequelize = new Sequelize('groupomania', 'root', '', {
-    host: 'localhost',
-    dialect: 'mysql',
-    port: 3308,
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, '', {
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DIALECT,
+    port: process.env.DB_PORT,
     pool: {
         max: 10,
         min: 0,

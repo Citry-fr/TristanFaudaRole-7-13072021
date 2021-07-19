@@ -12,10 +12,10 @@ module.exports = (sequelize, type) => {
         password: type.STRING,
         firstName: type.STRING,
         lastName: type.STRING,
-        /*rank: {
+        rank: {
             max: 1,
             min: 0,
             type: type.INTEGER
-        }*/
+        }
     });
 };

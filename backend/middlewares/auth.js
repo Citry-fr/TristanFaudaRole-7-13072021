@@ -14,3 +14,17 @@ module.exports = (req, res, next) => {
 
     }
 };
+
+/*  TODO
+
+Modification middleware auth pour prendre en compte le rang du l'utilisateur
+
+Remplir le fichier .env
+
+Finir toutes les fonction avec un .catch, modifier la fonction modifyComments, CreateComment.
+
+Modifier le model et ajouter une donnée status
+
+Crée la route admin pour les commentaire.
+
+*/

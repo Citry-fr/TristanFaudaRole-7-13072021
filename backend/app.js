@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const helmet = require('helmet');
 
 userRoutes = require('./routes/userRte');
 gifRoutes = require('./routes/gifRte');
@@ -9,6 +10,7 @@ comRoutes = require('./routes/comRte');
 
 const app = express();
 
+app.use(helmet());
 app.use(bodyParser.json());
 
 app.use('/api/auth', userRoutes);

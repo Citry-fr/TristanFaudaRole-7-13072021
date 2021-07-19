@@ -9,8 +9,7 @@ exports.postComment = (req, res, next) => {
         .then(com => res.json(com));
 }
 
-exports.modifyComment = (req, res, next) => {
-    
+exports.modifyComment = (req, res, next) => {    
     Comment.update(
         {
             ...req.body,
@@ -26,4 +25,21 @@ exports.deleteComment = (req, res, next) => {
     Comment.destroy({ where: { id: req.params.comId }})
         .then(res.status(200).json({ message: "Commentaire Supprimé !"}))
         .catch(error => res.status(500).json({ error }));
+}
+
+exports.getPendingComment = (req, res, next) => {
+    Comment.findAll({ where: {status: 0}})
+        .then(coms => res.json(coms));
+}
+
+exports.acceptComment = (req, res, next) => {    
+    Comment.update(
+        {
+            status: req.body.status
+        },
+        {
+            where: {id: req.params.comId}
+        })
+            .then(() => res.status(200).json({ message: "Commentaire Accepté !"}))
+            .catch(error => res.status(401).json({ error: error }));
 }

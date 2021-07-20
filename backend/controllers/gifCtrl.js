@@ -12,11 +12,11 @@ exports.postGif = (req, res, next) => {
 exports.getGif = (req, res, next) => {
     Gif.findOne({ where: {id: req.params.gifId}, 
         include: [
+            User,
+            Comment,
             {
-            model: User,
-             include: [
-                 {model: Comment, include: User}
-                ]
+                model: Comment,
+                include: [User]
             }
         ]
     })

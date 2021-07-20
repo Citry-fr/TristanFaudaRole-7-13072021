@@ -5,28 +5,39 @@ exports.postGif = (req, res, next) => {
         ...req.body
     });
     Gif.create({...gif.dataValues})
-        .then(gif => res.json(gif));
+        .then(gif => res.status(200).json({message: 'Post sauvegardé !'}))
+        .catch(error => res.status(400).json({ error }));
 };
 
-exports.getUserGifs = (req, res, next) => {
-    User.findAll({
-        where: { id: req.params.userId},
-        include: [Gif, Comment]
-        }).then(gifs => res.json(gifs));
+exports.getGif = (req, res, next) => {
+    Gif.findOne({ where: {id: req.params.gifId}, 
+        include: [
+            {
+            model: User,
+             include: [
+                 {model: Comment, include: User}
+                ]
+            }
+        ]
+    })
+        .then(gif => res.json(gif))
+        .catch(error => res.status(404).json({ error }));
 }
 
 exports.getAllGifs = (req, res, next) => {
-    Gif.findAll({
-        include: [User, Comment]
-    }).then(gifs => res.json(gifs));
+    Gif.findAll({ include: [User, Comment] })
+        .then(gifs => res.status(200).json(gifs))
+        .catch(error => res.status(400).json({ error }));
 }
 
 exports.deleteGif = (req, res, next) => {
     Comment.destroy({where: {gifId: req.params.gifId}})
         .then(() => {
             Gif.destroy({where: {id: req.params.gifId}})
-                .then(res.status(200).json({ message: "Gif et commentaires lié supprimé !"}));
-        });
+                .then(res.status(200).json({ message: "Gif et commentaires lié supprimé !"}))
+                .catch(error => res.status(400).json({ error }));
+        })
+        .catch(error => res.status(400).json({ error }));
 }
 exports.modifyGif = (req, res, next) => {
     Gif.update(
@@ -37,5 +48,5 @@ exports.modifyGif = (req, res, next) => {
             where: {id: req.params.gifId}
         }
     ).then(gif => res.status(200).json({ message: "Gif modifié !"}))
-     .catch(error => res.status(401).json({ error: error }));
+     .catch(error => res.status(400).json({ error: error }));
 }

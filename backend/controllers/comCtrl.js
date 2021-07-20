@@ -6,7 +6,8 @@ exports.postComment = (req, res, next) => {
         gifId: req.params.gifId
     })
     Comment.create({...com.dataValues})
-        .then(com => res.json(com));
+        .then(com => res.status(200).json(com))
+        .catch(error => res.status(400).json({ error }));
 }
 
 exports.modifyComment = (req, res, next) => {    
@@ -29,7 +30,8 @@ exports.deleteComment = (req, res, next) => {
 
 exports.getPendingComment = (req, res, next) => {
     Comment.findAll({ where: {status: 0}})
-        .then(coms => res.json(coms));
+        .then(coms => res.json(coms))
+        .catch(error => res.status(400).json({ error }));
 }
 
 exports.acceptComment = (req, res, next) => {    
@@ -41,5 +43,5 @@ exports.acceptComment = (req, res, next) => {
             where: {id: req.params.comId}
         })
             .then(() => res.status(200).json({ message: "Commentaire Accepté !"}))
-            .catch(error => res.status(401).json({ error: error }));
+            .catch(error => res.status(401).json({ error }));
 }

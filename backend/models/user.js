@@ -16,6 +16,7 @@ module.exports = (sequelize, type) => {
             max: 1, //Admin
             min: 0, //Membre
             type: type.INTEGER
-        }
+        },
+        isDisabled: type.BOOLEAN
     });
 };

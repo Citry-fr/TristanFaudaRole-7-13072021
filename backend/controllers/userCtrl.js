@@ -9,7 +9,8 @@ exports.signup = (req, res, next) => {
         .then(hash => {
             User.create({
                 ...userObject,
-                password: hash
+                password: hash,
+                isDisabled: false
             }).then(user => res.json(user));
         }); 
 };
@@ -17,8 +18,8 @@ exports.signup = (req, res, next) => {
 exports.login = (req, res, next) => {
     User.findOne({ where: {email: req.body.email}})
         .then(user => {
-            if(!user){
-                return res.status(401).json({ error: 'Utilisateur inconnu.'})
+            if(!user || user.isDisabled){
+                return res.status(401).json({ error: 'Utilisateur inconnu ou compte désactivé.'})
             }
             bcrypt.compare(req.body.password, user.password)
                 .then(valid => {

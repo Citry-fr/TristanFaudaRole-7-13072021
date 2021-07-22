@@ -1,3 +1,4 @@
+//Création du model Comment
 module.exports = (sequelize, type) => {
     return sequelize.define('comment', {
         id: {

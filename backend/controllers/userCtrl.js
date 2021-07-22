@@ -1,8 +1,11 @@
+//Importation de bcrypt et jsonwebtoken
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+//Importation du model User
 const {User} = require('../sequelize');
 
+//Route création d'un utilisateur
 exports.signup = (req, res, next) => {    
     const userObject = req.body;
     bcrypt.hash(req.body.password, 10)
@@ -17,6 +20,8 @@ exports.signup = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
+
+//Route connection d'un utilisateur
 exports.login = (req, res, next) => {
     User.findOne({ where: {email: req.body.email}})
         .then(user => {
@@ -46,12 +51,15 @@ exports.login = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
+
+//Route pour récupérer tout les utilisateur, utilisable par l'admin
 exports.getAllUsers = (req, res, next) => {
     User.findAll()
         .then(users => res.status(200).json(users))
         .catch(error => res.status(500).json({ error }));
 };
 
+//Route pour désactivé le compte d'un utilisateur, utilisable par l'admin
 exports.disableUser = (req, res, next) => {
     User.update(
         {

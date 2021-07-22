@@ -1,5 +1,7 @@
+//Imprtation de model Comment après initialisation avec Sequelize
 const {Comment} = require('../sequelize');
 
+//Route pour poster un commentaire
 exports.postComment = (req, res, next) => {
     const com = new Comment({
         ...req.body,
@@ -10,6 +12,7 @@ exports.postComment = (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 }
 
+//Route pour Modifier un commentaire
 exports.modifyComment = (req, res, next) => {    
     Comment.update(
         {
@@ -22,18 +25,22 @@ exports.modifyComment = (req, res, next) => {
             .then(() => res.status(200).json({ message: "Commentaire modifié !"}))
             .catch(error => res.status(401).json({ error: error }));
 }
+
+//Route pour supprimer un commentaire
 exports.deleteComment = (req, res, next) => {
     Comment.destroy({ where: { id: req.params.comId }})
         .then(res.status(200).json({ message: "Commentaire Supprimé !"}))
         .catch(error => res.status(500).json({ error }));
 }
 
+//Route pour récuperer tout les commentaire en attente de validation par l'admin
 exports.getPendingComment = (req, res, next) => {
     Comment.findAll({ where: {status: 0}})
         .then(coms => res.json(coms))
         .catch(error => res.status(400).json({ error }));
 }
 
+//Route pour accepter un commentaire, utilisable que par l'admin
 exports.acceptComment = (req, res, next) => {    
     Comment.update(
         {

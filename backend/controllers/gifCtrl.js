@@ -1,5 +1,7 @@
+//Importation des différents models requis pour les routes
 const {Gif, User, Comment} = require('../sequelize');
 
+//Route pour poster un gif
 exports.postGif = (req, res, next) => {
     const gif = new Gif({
         ...req.body
@@ -9,6 +11,7 @@ exports.postGif = (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 };
 
+//Route pour récupérer un gif
 exports.getGif = (req, res, next) => {
     Gif.findOne({ where: {id: req.params.gifId}, 
         include: [
@@ -24,12 +27,14 @@ exports.getGif = (req, res, next) => {
         .catch(error => res.status(404).json({ error }));
 }
 
+//Route pour récupérer tout les gifs
 exports.getAllGifs = (req, res, next) => {
     Gif.findAll({ include: [User, Comment] })
         .then(gifs => res.status(200).json(gifs))
         .catch(error => res.status(400).json({ error }));
 }
 
+//Route pour supprimer un gif
 exports.deleteGif = (req, res, next) => {
     Comment.destroy({where: {gifId: req.params.gifId}})
         .then(() => {
@@ -39,6 +44,8 @@ exports.deleteGif = (req, res, next) => {
         })
         .catch(error => res.status(400).json({ error }));
 }
+
+//Route pour modifier un gif
 exports.modifyGif = (req, res, next) => {
     Gif.update(
         {

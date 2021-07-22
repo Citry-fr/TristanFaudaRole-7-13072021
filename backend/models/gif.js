@@ -1,3 +1,4 @@
+//Création du model Gif
 module.exports = (sequelize, type) => {
     return sequelize.define('gif', {
         id: {

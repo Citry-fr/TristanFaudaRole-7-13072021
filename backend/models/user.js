@@ -1,3 +1,4 @@
+//Création du model User
 module.exports = (sequelize, type) => {
     return sequelize.define('user', {
         id: {

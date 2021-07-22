@@ -47,6 +47,6 @@ exports.modifyGif = (req, res, next) => {
         {
             where: {id: req.params.gifId}
         }
-    ).then(gif => res.status(200).json({ message: "Gif modifié !"}))
+    ).then(() => res.status(200).json({ message: "Gif modifié !"}))
      .catch(error => res.status(400).json({ error: error }));
 }

@@ -2,14 +2,21 @@
   <div id="app">    
     <div id="nav">
       <div>
+        <span>|</span>
         <router-link to="/">Les Gifs</router-link>
+        <span>|</span>
         <router-link to="/postgif">Poster un Gif</router-link>
+        <span>|</span>
         <router-link to="/admin" v-if="rankChecker">Admin</router-link>
+        <span v-if="rankChecker">|</span>
       </div>
       <img src="./assets/icon-left-font-monochrome-black.svg" alt="logo Groupomania">
       <div>
+        <span>|</span>
         <router-link to="/login">Se connecter</router-link>
+        <span>|</span>
         <router-link to="/signup">S'inscrire</router-link>
+        <span>|</span>
       </div>
 
       
@@ -53,10 +60,16 @@ img {
   font-weight: bold;
   color: #2c3e50;
   text-decoration: none;
+  font-size: 1.3em;
 }
 
 #nav a.router-link-exact-active {
   color: #FD2D01;
+}
+
+span{
+  color: #FD2D01;
+  font-size: 1.5em;
 }
 </style>
 

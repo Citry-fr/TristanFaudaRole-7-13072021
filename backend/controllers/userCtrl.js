@@ -8,6 +8,7 @@ const {User} = require('../sequelize');
 //Route création d'un utilisateur
 exports.signup = (req, res, next) => {    
     const userObject = req.body;
+    console.log(req);
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
             User.create({

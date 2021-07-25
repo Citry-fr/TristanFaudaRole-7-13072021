@@ -1,27 +1,47 @@
 <template>
     <div class="form">
         <div class="form__email">
-            <label class="form__email__label" for="email">Email :</label>
-            <input class="form__email__input" type="email" name="email" id="email">
+            <label class="form__email__label" for="email">Email : {{email}}</label>
+            <input class="form__email__input" type="email" name="email" id="email" v-model="email">
         </div>
         <div class="form__password">
             <label class="form__password__label" for="password">Mot de passe :</label>
-            <input class="form__password__input" type="password" name="password" id="password">
+            <input class="form__password__input" type="password" name="password" id="password" v-model="password">
         </div>
         <div class="form__firstname">
             <label class="form__firstname__label" for="firstname">Prénom :</label>
-            <input class="form__firstname__input" type="text" name="firstname" id="firstname">
+            <input class="form__firstname__input" type="text" name="firstname" id="firstname" v-model="firstname">
         </div>
         <div class="form__lastname">
             <label class="form__lastname__label" for="lastname">Nom :</label>
-            <input class="form__lastname__input" type="text" name="lastname" id="lastname">
+            <input class="form__lastname__input" type="text" name="lastname" id="lastname" v-model="lastname">
         </div>
+        
     </div>
 </template>
 
 <script>
+
 export default {
-    name: 'SignupForm'
+    name: 'SignupForm',
+    data() {
+        return {
+            email: "", 
+            password: "",
+            firstname: "",
+            lastname: ""
+        };
+    },
+    methods: {
+        getData() {
+            return {
+                email: this.email,
+                password: this.password,
+                firstName: this.firstname,
+                lastName: this.lastname
+            };
+        }
+    },
 }
 </script>
 
@@ -58,5 +78,9 @@ export default {
         &:focus{
             border-color: #FD2D01;
         }
+    }
+
+    .bouton{
+        margin-top: 30px;
     }
 </style>

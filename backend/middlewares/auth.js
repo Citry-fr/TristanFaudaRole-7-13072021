@@ -12,23 +12,11 @@ module.exports = (req, res, next) => {
         const token = req.headers.authorization.split(' ')[1];
         const decodedToken = jwt.verify(token, 'needToChangeThis');
         const {userId, rank} = decodedToken;
-        console.log('Rang :' + rank);
-        switch (rank) {
-            case 0:
-                if(req.body.userId && req.body.userId !== userId){
-                    throw 'Invalid user ID';
-                } else {
-                    next();
-                }
-                break;
-            case 1:
-                next();
-                break;
-            default:
-                console.error('Rang inconnus');
-                break;
+        if(rank === 1 || req.body.userId && req.body.userId === userId){
+            next();
+        } else {
+            throw 'Invalid user rank or ID';
         }
-        
     } catch (err){
         console.error(err);
     }

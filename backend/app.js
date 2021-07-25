@@ -5,6 +5,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
+const cors = require('cors')
 
 //Importation des différents router de l'application
 userRoutes = require('./routes/userRte');
@@ -17,6 +18,7 @@ const app = express();
 //Utilisation de helmet et bodyparser
 app.use(helmet());
 app.use(bodyParser.json());
+app.use(cors());
 
 //Utilisation des router et definition de leur route
 app.use('/api/auth', userRoutes);

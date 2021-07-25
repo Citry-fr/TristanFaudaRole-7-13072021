@@ -4,6 +4,7 @@ import AllGifs from '../views/AllGifs.vue'
 import PostGif from '../views/PostGif.vue'
 import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
+import Admin from '../views/Admin.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/signup',
     name: 'Signup',
     component: Signup
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin
   }
 ]
 

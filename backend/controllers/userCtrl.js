@@ -79,3 +79,14 @@ exports.disableUser = (req, res, next) => {
     })
     .catch(err => res.status(404).json({ error: 'Utilisateur inexistant !'}));
 };
+
+exports.deleteUser = (req, res, next) => {
+    User.destroy({
+        where: {
+            id: req.params.id,
+            isDisabled: true
+        }
+    })
+    .then(() => res.status(200).json({ message: "Utilisateur supprimé !"}))
+    .catch(error => res.status(404).json({ error }));
+}

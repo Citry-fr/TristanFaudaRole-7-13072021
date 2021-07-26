@@ -39,7 +39,9 @@
 
 img {
   width: 250px;
-  position: fixed;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 #nav {
@@ -54,6 +56,7 @@ img {
   display: flex;
   gap: 15px;
   align-items: center;
+  margin: auto;
 }
 
 #nav a {

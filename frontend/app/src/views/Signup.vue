@@ -2,7 +2,7 @@
     <div>
         <h1>Formulaire d'inscription</h1>
         <SignupForm ref="form" />
-        <Bouton text="S'inscrire" class="bouton" v-on:submit="getFormData" />
+        <Bouton text="S'inscrire" class="bouton" v-on:submit="getFormData" v-on:disable="getFormValid" :disabled="!valid"/>
     </div>
 </template>
 
@@ -21,7 +21,16 @@ export default {
         SignupForm,
         Bouton
     },
+    data() {
+        return {
+            valid: false
+        };
+    },
     methods: {
+        getFormValid() {
+            this.valid = this.$refs.form.getValid();
+            console.log(this.valid);
+        },
         getFormData() {            
             const data = this.$refs.form.getData();
             const body = {
@@ -36,10 +45,10 @@ export default {
             };
             console.log(requestOptions.body);
 
-            fetch("http://localhost:3000/api/auth/signup", requestOptions,)
+            /*fetch("http://localhost:3000/api/auth/signup", requestOptions,)
                 .then(response => response.text())
                 .then(result => console.log(result))
-                .catch(error => console.log('error', error));
+                .catch(error => console.log('error', error));*/
         }
     }
 }

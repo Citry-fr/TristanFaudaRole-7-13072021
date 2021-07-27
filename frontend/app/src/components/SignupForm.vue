@@ -12,9 +12,8 @@
             <div class="label">
                 <label class="form__password__label" for="password">Mot de passe :</label>
                 <p class="error" >Mot de passe incorrect</p>
-            </div>
-            
-            <input class="form__password__input" type="password" name="password" id="password" >
+            </div>            
+            <input class="form__password__input" type="password" name="password" id="password" :value="password" @change="modifyData">
             
         </div>
         <div class="form__firstname">
@@ -23,7 +22,7 @@
                 <label class="form__firstname__label" for="firstname">Prénom :</label>
                 <p class="error" >Prénom incorrect</p>
             </div>
-            <input class="form__firstname__input" type="text" name="firstname" id="firstname">
+            <input class="form__firstname__input" type="text" name="firstname" id="firstname" :value="firstname" @change="modifyData">
             
         </div>
         <div class="form__lastname">
@@ -31,7 +30,7 @@
                 <label class="form__lastname__label" for="lastname">Nom :</label>
                 <p class="error" >Nom incorrect</p>
             </div>
-            <input class="form__lastname__input" type="text" name="lastname" id="lastname">            
+            <input class="form__lastname__input" type="text" name="lastname" id="lastname" :value="lastname" @change="modifyData">            
         </div>
     </form>
 </template>
@@ -54,11 +53,14 @@ export default {
             };
         },
         modifyData(e) {
-            this.$store.commit('MODIFY_DATA', e.target.value)
+            this.$store.commit('MODIFY_DATA', {
+                element: e.target.name,
+                value: e.target.value,
+            })
         }  
     },
     computed: {
-        ...mapState(['email']),
+        ...mapState(['email', 'password', 'firstname', 'lastname']),
     }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
-    <div @mouseover="disableButton">
-        <button class="btn" @click="submitForm" :disabled="disabled">{{text}}</button>
+    <div>
+        <button class="btn" @click="submitForm" :disabled="valid">{{text}}</button>
     </div>
 </template>
 
@@ -10,14 +10,11 @@ export default {
     name: 'Bouton',
     props: {
         text: String,
-        disabled: Boolean
+        valid: Boolean      
     },
     methods: {
         submitForm() {
             this.$emit('submit');
-        },
-        disableButton() {
-            this.$emit('disable')
         }
     }
 }
@@ -37,6 +34,9 @@ export default {
         &:active{
             border-color: #FD2D01;
             color: #FD2D01;
+        }
+        &:disabled{
+            border-style: dashed;
         }
     }
 </style>

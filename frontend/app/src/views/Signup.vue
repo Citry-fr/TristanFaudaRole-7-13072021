@@ -2,7 +2,7 @@
     <div>
         <h1>Formulaire d'inscription</h1>
         <SignupForm ref="form" />
-        <Bouton text="S'inscrire" class="bouton" v-on:submit="getFormData" v-on:disable="getFormValid" :disabled="!valid"/>
+        <Bouton text="S'inscrire" class="bouton" v-on:submit="getFormData" :valid="formValid()" />
     </div>
 </template>
 
@@ -27,12 +27,11 @@ export default {
         };
     },
     methods: {
-        getFormValid() {
-            this.valid = this.$refs.form.getValid();
-            console.log(this.valid);
+        formValid() {
+            return this.$refs.form.getValid();
         },
         getFormData() {            
-            const data = this.$refs.form.getData();
+            const data = { ...this.$refs.form.formData };
             const body = {
                 ...data,
                 rank: 0

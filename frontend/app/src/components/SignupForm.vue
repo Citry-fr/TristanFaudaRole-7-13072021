@@ -1,25 +1,38 @@
 <template>
     <form class="form">
         <div class="form__email">
-            <label class="form__email__label" for="email">Email :</label>
+            <div class="label">
+                <label class="form__email__label" for="email">Email :</label>
+                <p class="error" v-show="!isValid.email">Email incorrect</p>
+            </div>
             <input class="form__email__input" type="email" name="email" id="email" v-model="formData.email" @input="checkData(formData.email, regData.email, 'email')">
-            <p v-show="!isValid.email">Email incorrect</p>
+            
         </div>
         <div class="form__password">
-            <label class="form__password__label" for="password">Mot de passe :</label>
+            <div class="label">
+                <label class="form__password__label" for="password">Mot de passe :</label>
+                <p class="error" v-show="!isValid.password">Mot de passe incorrect</p>
+            </div>
+            
             <input class="form__password__input" type="password" name="password" id="password" v-model="formData.password" @input="checkData(formData.password, regData.password, 'password')">
-            <p v-show="!isValid.password">Mot de passe incorrect</p>
+            
         </div>
         <div class="form__firstname">
-            <label class="form__firstname__label" for="firstname">Prénom :</label>
+
+            <div class="label">
+                <label class="form__firstname__label" for="firstname">Prénom :</label>
+                <p class="error" v-show="!isValid.firstname">Prénom incorrect</p>
+            </div>
             <input class="form__firstname__input" type="text" name="firstname" id="firstname" v-model="formData.firstname" @input="checkData(formData.firstname, regData.firstname, 'firstname')">
-            <p v-show="!isValid.firstname">Prénom incorrect</p>
+            
         </div>
         <div class="form__lastname">
-            <label class="form__lastname__label" for="lastname">Nom :</label>
-            <input class="form__lastname__input" type="text" name="lastname" id="lastname" v-model="formData.lastname" @input="checkData(formData.lastname, regData.lastname, 'lastname')">
-            <p v-show="!isValid.lastname">Nom incorrect</p>
-        </div>        
+            <div class="label">
+                <label class="form__lastname__label" for="lastname">Nom :</label>
+                <p class="error" v-show="!isValid.lastname">Nom incorrect</p>
+            </div>
+            <input class="form__lastname__input" type="text" name="lastname" id="lastname" v-model="formData.lastname" @input="checkData(formData.lastname, regData.lastname, 'lastname')">            
+        </div>
     </form>
 </template>
 
@@ -60,19 +73,15 @@ export default {
             console.log(valid);
             this.isValid[input] = valid;
             console.log(this.isValid[input]);
-        },
+        }, 
         getValid() {
-            let allTrue = false;
-            for (const bool in this.isValid) {
-                if(this.isValid[bool] === false){
-                    allTrue = false;
-                    break;
-                }
-                allTrue = true;
-            }
-            return allTrue;
-        }
+            const values = Object.values(this.isValid);
+            return !values.some(v => v !== true);
+        }    
     },
+    computed: {
+        
+    }
 }
 </script>
 
@@ -94,7 +103,10 @@ export default {
         font-weight: bold;
         font-size: 1.5em;
         width: 400px;
+        height: 40px;
         display: flex;
+        justify-content: baseline;
+        line-height: 40px;
     }
 
     input {
@@ -112,6 +124,19 @@ export default {
     }
 
     .bouton{
-        margin-top: 30px;
+        margin-top: 30px;        
+    }
+
+    .label {
+        display: flex;
+        width: 415px;
+        height: 40px;
+    }
+
+    .error {
+        width: 100%;
+        height: 100%;
+        color: #FD2D01;
+        font-weight: bold;
     }
 </style>

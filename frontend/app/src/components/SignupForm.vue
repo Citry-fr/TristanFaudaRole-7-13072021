@@ -3,63 +3,48 @@
         <div class="form__email">
             <div class="label">
                 <label class="form__email__label" for="email">Email :</label>
-                <p class="error" v-show="!isValid.email">Email incorrect</p>
+                <p class="error" >Email incorrect</p>
             </div>
-            <input class="form__email__input" type="email" name="email" id="email" v-model="formData.email" @input="checkData(formData.email, regData.email, 'email')">
+            <input class="form__email__input" type="email" name="email" id="email" :value="email" @change="modifyData">
             
         </div>
         <div class="form__password">
             <div class="label">
                 <label class="form__password__label" for="password">Mot de passe :</label>
-                <p class="error" v-show="!isValid.password">Mot de passe incorrect</p>
+                <p class="error" >Mot de passe incorrect</p>
             </div>
             
-            <input class="form__password__input" type="password" name="password" id="password" v-model="formData.password" @input="checkData(formData.password, regData.password, 'password')">
+            <input class="form__password__input" type="password" name="password" id="password" >
             
         </div>
         <div class="form__firstname">
 
             <div class="label">
                 <label class="form__firstname__label" for="firstname">Prénom :</label>
-                <p class="error" v-show="!isValid.firstname">Prénom incorrect</p>
+                <p class="error" >Prénom incorrect</p>
             </div>
-            <input class="form__firstname__input" type="text" name="firstname" id="firstname" v-model="formData.firstname" @input="checkData(formData.firstname, regData.firstname, 'firstname')">
+            <input class="form__firstname__input" type="text" name="firstname" id="firstname">
             
         </div>
         <div class="form__lastname">
             <div class="label">
                 <label class="form__lastname__label" for="lastname">Nom :</label>
-                <p class="error" v-show="!isValid.lastname">Nom incorrect</p>
+                <p class="error" >Nom incorrect</p>
             </div>
-            <input class="form__lastname__input" type="text" name="lastname" id="lastname" v-model="formData.lastname" @input="checkData(formData.lastname, regData.lastname, 'lastname')">            
+            <input class="form__lastname__input" type="text" name="lastname" id="lastname">            
         </div>
     </form>
 </template>
 
 <script>
 
+import { mapState } from 'vuex';
+
 export default {
     name: 'SignupForm',
     data() {
         return {
-            formData: {
-                email: "", 
-                password: "",
-                firstname: "",
-                lastname: ""
-            },
-            regData: {
-                email: /^[\w-.]+@([\w-]+[.])+[\w-]{2,4}$/,
-                password: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                firstname: /^[A-Za-zÀ-ü-']+$/,
-                lastname: /^[A-Za-zÀ-ü-']+$/
-            },
-            isValid: {
-                email: false, 
-                password: false,
-                firstname: false,
-                lastname: false
-            }
+            
         };
     },
     methods: {
@@ -68,19 +53,12 @@ export default {
                 ...this.formData
             };
         },
-        checkData(element, reg, input) {
-            const valid = reg.test(element);
-            console.log(valid);
-            this.isValid[input] = valid;
-            console.log(this.isValid[input]);
-        }, 
-        getValid() {
-            const values = Object.values(this.isValid);
-            return !values.some(v => v !== true);
-        }    
+        modifyData(e) {
+            this.$store.commit('MODIFY_DATA', e.target.value)
+        }  
     },
     computed: {
-        
+        ...mapState(['email']),
     }
 }
 </script>

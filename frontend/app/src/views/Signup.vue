@@ -2,7 +2,7 @@
     <div>
         <h1>Formulaire d'inscription</h1>
         <SignupForm ref="form" />
-        <Bouton text="S'inscrire" class="bouton" v-on:submit="getFormData" :valid="formValid()" />
+        <Bouton text="S'inscrire" class="bouton" v-on:submit="getFormData"/>
     </div>
 </template>
 

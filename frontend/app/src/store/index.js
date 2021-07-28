@@ -23,21 +23,12 @@ export default new Vuex.Store({
         firstname: "",
         lastname: ""
     },
-
-    formFullValid: "",
   },
   mutations: {
     MODIFY_DATA(state, {element, value}){
       state.formData[element] = value;
       state.isValid[element] = state.regData[element].test(value);
     },
-    MODIFY_FULL_VALID(state) {
-      if(this.buttonState){
-        state.formFullValid = true;
-      } else {
-        state.formFullValid = false;
-      }
-    }
   },
   actions: {
     buttonState() {

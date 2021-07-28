@@ -2,7 +2,7 @@
     <div>
         <h1>Formulaire d'inscription</h1>
         <SignupForm ref="form" />
-        <Bouton text="S'inscrire" class="bouton" :valid="formFullValid"/>
+        <Bouton text="S'inscrire" class="bouton" :valid="!getValid()"/>
     </div>
 </template>
 
@@ -10,7 +10,8 @@
 
 import SignupForm from '../components/SignupForm.vue';
 import Bouton from '../components/Bouton.vue';
-import {  mapState } from 'vuex';
+
+import { mapState } from 'vuex';
 
 export default {
     name: 'Signup',
@@ -22,10 +23,14 @@ export default {
         return {
         }
     },
-    methods: {          
+    methods: {    
+        getValid() {
+            const values = Object.values(this.isValid);
+            return !values.some(v => v !== true);
+        }
     },
     computed: {
-        ...mapState(['formFullValid']),
+        ...mapState([ 'isValid' ]),        
     }
 }
 </script>

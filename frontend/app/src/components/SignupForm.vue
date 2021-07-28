@@ -5,7 +5,7 @@
                 <label class="form__email__label" for="email">Email :</label>
                 <p v-if="formData.email !== '' && !isValid.email" class="error" >Email incorrect</p>
             </div>
-            <input class="form__email__input" type="email" name="email" id="email" :value="formData.email" @change="modifyData; checkFullValid">
+            <input class="form__email__input" type="email" name="email" id="email" :value="formData.email" @change="modifyData">
             
         </div>
         <div class="form__password">
@@ -13,7 +13,7 @@
                 <label class="form__password__label" for="password">Mot de passe :</label>
                 <p v-if="formData.password !== '' && !isValid.password" class="error" >Mot de passe incorrect</p>
             </div>            
-            <input class="form__password__input" type="password" name="password" id="password" :value="formData.password" @change="modifyData; checkFullValid">
+            <input class="form__password__input" type="password" name="password" id="password" :value="formData.password" @change="modifyData">
             
         </div>
         <div class="form__firstname">
@@ -22,7 +22,7 @@
                 <label class="form__firstname__label" for="firstname">Prénom :</label>
                 <p v-if="formData.firstname !== '' && !isValid.firstname" class="error" >Prénom incorrect</p>
             </div>
-            <input class="form__firstname__input" type="text" name="firstname" id="firstname" :value="formData.firstname" @change="modifyData; checkFullValid">
+            <input class="form__firstname__input" type="text" name="firstname" id="firstname" :value="formData.firstname" @change="modifyData">
             
         </div>
         <div class="form__lastname">
@@ -30,7 +30,7 @@
                 <label class="form__lastname__label" for="lastname">Nom :</label>
                 <p v-if="formData.lastname !== '' && !isValid.lastname" class="error" >Nom incorrect</p>
             </div>
-            <input class="form__lastname__input" type="text" name="lastname" id="lastname" :value="formData.lastname" @change="modifyData; checkFullValid">            
+            <input class="form__lastname__input" type="text" name="lastname" id="lastname" :value="formData.lastname" @change="modifyData">            
         </div>
     </form>
 </template>
@@ -53,9 +53,6 @@ export default {
                 value: e.target.value,
             });
         },
-        checkFullValid() {
-            this.$store.commit('MODIFY_FULL_VALID');
-        }
     },
     computed: {
         ...mapState(['formData', 'isValid']),

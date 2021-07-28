@@ -3,7 +3,6 @@
         <div class="form__email">
             <div class="label">
                 <label class="form__email__label" for="email">Email :</label>
-                <p class="error" >Email incorrect</p>
             </div>
             <input class="form__email__input" type="email" name="email" id="email" >
             
@@ -11,7 +10,6 @@
         <div class="form__password">
             <div class="label">
                 <label class="form__password__label" for="password">Mot de passe :</label>
-                <p class="error" >Mot de passe incorrect</p>
             </div>            
             <input class="form__password__input" type="password" name="password" id="password" >            
         </div>

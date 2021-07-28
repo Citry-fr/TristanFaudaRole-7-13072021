@@ -2,7 +2,7 @@
     <div>
         <h1>Formulaire d'inscription</h1>
         <SignupForm ref="form" />
-        <Bouton text="S'inscrire" class="bouton" :valid="!getValid()"/>
+        <Bouton text="S'inscrire" class="bouton" :valid="!getValid()" v-on:submit="postData"/>
     </div>
 </template>
 
@@ -11,7 +11,7 @@
 import SignupForm from '../components/SignupForm.vue';
 import Bouton from '../components/Bouton.vue';
 
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
     name: 'Signup',
@@ -27,7 +27,8 @@ export default {
         getValid() {
             const values = Object.values(this.isValid);
             return !values.some(v => v !== true);
-        }
+        },
+        ...mapActions([ 'postData' ]),
     },
     computed: {
         ...mapState([ 'isValid' ]),        

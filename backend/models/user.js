@@ -11,8 +11,8 @@ module.exports = (sequelize, type) => {
             unique: true
         },
         password: type.STRING,
-        firstName: type.STRING,
-        lastName: type.STRING,
+        firstname: type.STRING,
+        lastname: type.STRING,
         rank: {
             max: 1, //Admin
             min: 0, //Membre

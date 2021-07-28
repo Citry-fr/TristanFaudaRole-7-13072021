@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button class="btn" :disabled="valid">{{text}}</button>
+        <button class="btn" :disabled="valid" @click="submitEvent">{{text}}</button>
     </div>
 </template>
 
@@ -13,7 +13,9 @@ export default {
         valid: Boolean
     },
     methods: {
-
+        submitEvent() {
+            this.$emit('submit');
+        }
     },
     computed: {
 

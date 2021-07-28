@@ -31,9 +31,26 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    buttonState() {
-      const values = Object.values(this.isValid);
-      return !values.some(v => v !== true);
+    postData() {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        ...this.state.formData,
+        "rank": 0
+      });
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+      console.log(raw);
+      fetch("http://localhost:3000/api/auth/signup", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
     }
   },
   modules: {

@@ -18,19 +18,32 @@ export default new Vuex.Store({
         lastname: /^[A-Za-zÀ-ü-']+$/
     },
     isValid: {
-        email: false, 
-        password: false,
-        firstname: false,
-        lastname: false
-    }
+        email: "", 
+        password: "",
+        firstname: "",
+        lastname: ""
+    },
+
+    formFullValid: "",
   },
   mutations: {
     MODIFY_DATA(state, {element, value}){
       state.formData[element] = value;
-      console.log(state.formData);
+      state.isValid[element] = state.regData[element].test(value);
+    },
+    MODIFY_FULL_VALID(state) {
+      if(this.buttonState){
+        state.formFullValid = true;
+      } else {
+        state.formFullValid = false;
+      }
     }
   },
   actions: {
+    buttonState() {
+      const values = Object.values(this.isValid);
+      return !values.some(v => v !== true);
+    }
   },
   modules: {
   }

@@ -3,34 +3,34 @@
         <div class="form__email">
             <div class="label">
                 <label class="form__email__label" for="email">Email :</label>
-                <p class="error" >Email incorrect</p>
+                <p v-if="formData.email !== '' && !isValid.email" class="error" >Email incorrect</p>
             </div>
-            <input class="form__email__input" type="email" name="email" id="email" :value="email" @change="modifyData">
+            <input class="form__email__input" type="email" name="email" id="email" :value="formData.email" @change="modifyData; checkFullValid">
             
         </div>
         <div class="form__password">
             <div class="label">
                 <label class="form__password__label" for="password">Mot de passe :</label>
-                <p class="error" >Mot de passe incorrect</p>
+                <p v-if="formData.password !== '' && !isValid.password" class="error" >Mot de passe incorrect</p>
             </div>            
-            <input class="form__password__input" type="password" name="password" id="password" :value="password" @change="modifyData">
+            <input class="form__password__input" type="password" name="password" id="password" :value="formData.password" @change="modifyData; checkFullValid">
             
         </div>
         <div class="form__firstname">
 
             <div class="label">
                 <label class="form__firstname__label" for="firstname">Prénom :</label>
-                <p class="error" >Prénom incorrect</p>
+                <p v-if="formData.firstname !== '' && !isValid.firstname" class="error" >Prénom incorrect</p>
             </div>
-            <input class="form__firstname__input" type="text" name="firstname" id="firstname" :value="firstname" @change="modifyData">
+            <input class="form__firstname__input" type="text" name="firstname" id="firstname" :value="formData.firstname" @change="modifyData; checkFullValid">
             
         </div>
         <div class="form__lastname">
             <div class="label">
                 <label class="form__lastname__label" for="lastname">Nom :</label>
-                <p class="error" >Nom incorrect</p>
+                <p v-if="formData.lastname !== '' && !isValid.lastname" class="error" >Nom incorrect</p>
             </div>
-            <input class="form__lastname__input" type="text" name="lastname" id="lastname" :value="lastname" @change="modifyData">            
+            <input class="form__lastname__input" type="text" name="lastname" id="lastname" :value="formData.lastname" @change="modifyData; checkFullValid">            
         </div>
     </form>
 </template>
@@ -47,20 +47,18 @@ export default {
         };
     },
     methods: {
-        getData() {
-            return {
-                ...this.formData
-            };
-        },
         modifyData(e) {
             this.$store.commit('MODIFY_DATA', {
                 element: e.target.name,
                 value: e.target.value,
-            })
-        }  
+            });
+        },
+        checkFullValid() {
+            this.$store.commit('MODIFY_FULL_VALID');
+        }
     },
     computed: {
-        ...mapState(['email', 'password', 'firstname', 'lastname']),
+        ...mapState(['formData', 'isValid']),
     }
 }
 </script>

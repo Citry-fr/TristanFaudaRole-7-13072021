@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button class="btn" @click="submitForm" :disabled="valid">{{text}}</button>
+        <button class="btn" :disabled="valid">{{text}}</button>
     </div>
 </template>
 
@@ -10,12 +10,13 @@ export default {
     name: 'Bouton',
     props: {
         text: String,
-        valid: Boolean      
+        valid: Boolean
     },
     methods: {
-        submitForm() {
-            this.$emit('submit');
-        }
+
+    },
+    computed: {
+
     }
 }
 </script>

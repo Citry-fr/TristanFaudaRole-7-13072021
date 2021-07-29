@@ -1,10 +1,12 @@
 // Importation des différents models requis pour les routes
 const {Gif, User, Comment} = require('../sequelize');
+const fs = require('fs');
 
 // Route pour poster un gif
 exports.postGif = (req, res, next) => {
     const gif = new Gif({
-        ...req.body
+        ...req.body,
+        gifUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
     Gif.create({...gif.dataValues})
         .then(gif => res.status(200).json({message: 'Post sauvegardé !'}))
@@ -38,9 +40,16 @@ exports.getAllGifs = (req, res, next) => {
 exports.deleteGif = (req, res, next) => {
     Comment.destroy({where: {gifId: req.params.gifId}})
         .then(() => {
-            Gif.destroy({where: {id: req.params.gifId}})
-                .then(res.status(200).json({ message: "Gif et commentaires lié supprimé !"}))
-                .catch(error => res.status(400).json({ error }));
+            Gif.findOne({where: {id: req.params.gifId}})
+                .then(gif => {
+                    const filename = gif.gifUrl.split('/images/')[1];
+                    fs.unlink(`images/${filename}`, () => {
+                        Gif.destroy({where: {id: req.params.gifId}})
+                            .then(res.status(200).json({ message: "Gif et commentaires lié supprimé !"}))
+                            .catch(error => res.status(400).json({ error }));
+                    });
+                })
+
         })
         .catch(error => res.status(400).json({ error }));
 }

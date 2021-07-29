@@ -9,9 +9,10 @@ const gifCtrl = require('../controllers/gifCtrl');
 
 //Importation du middleware auth
 const auth = require('../middlewares/auth');
+const multer = require('../middlewares/multer-config');
 
 //Définition des différentes route gif
-router.post('/', auth, gifCtrl.postGif);
+router.post('/', auth, multer, gifCtrl.postGif);
 router.get('/:gifId', auth, gifCtrl.getGif);
 router.get('/', auth, gifCtrl.getAllGifs);
 router.delete('/:gifId', auth, gifCtrl.deleteGif);

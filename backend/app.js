@@ -5,7 +5,8 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
-const cors = require('cors')
+const cors = require('cors');
+const path = require('path');
 
 //Importation des différents router de l'application
 userRoutes = require('./routes/userRte');
@@ -19,6 +20,8 @@ const app = express();
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(cors());
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 //Utilisation des router et definition de leur route
 app.use('/api/auth', userRoutes);

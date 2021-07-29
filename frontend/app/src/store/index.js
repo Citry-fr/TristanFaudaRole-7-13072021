@@ -27,6 +27,10 @@ export default new Vuex.Store({
     loginData: {
       email: "",
       password: ""
+    },
+    gifData: {
+      name: "",
+      gif: ""
     }
   },
   mutations: {
@@ -37,6 +41,13 @@ export default new Vuex.Store({
     MODIFY_LOGIN_DATA(state, {element, value}){
       state.loginData[element] = value;
       console.log(state.loginData);
+    },
+    MODIFY_GIF_DATA(state, {element, value}){
+      state.gifData[element] = value;
+      console.log(state.gifData);
+    },
+    MODIFY_GIF_FILE(state){
+      state.gifData.gif = document.getElementById('gif').files[0];
     }
   },
   actions: {
@@ -109,7 +120,36 @@ export default new Vuex.Store({
           location.reload();
         })
         .catch(error => console.log('error', error));
-    }
+    },
+    postGif() {
+      const user = JSON.parse(localStorage.getItem('User'))
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${user.token}`);
+
+      // var raw = JSON.stringify({
+      //   name: this.state.gifData.name,
+      //   userId: user.userId,
+      // });
+
+      const formData = new FormData();
+
+      formData.append("gif", this.state.gifData.gif);
+      formData.append("name", this.state.gifData.name);
+      formData.append("userId", user.userId);
+
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: formData,
+        redirect: 'follow'
+      };
+
+      fetch("http://localhost:3000/api/gif/", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+    },
   },
   modules: {
   }

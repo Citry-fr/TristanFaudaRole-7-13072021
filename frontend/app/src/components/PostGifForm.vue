@@ -1,17 +1,13 @@
 <template>
     <form class="form">
-        <div class="form__email">
-            <div class="label">
-                <label class="form__email__label" for="email">Email :</label>
-            </div>
-            <input class="form__email__input" type="email" name="email" id="email" :value="loginData.email" @change="modifyLoginData">
+        <div class="form__name">
+            <label class="form__name__label" for="name">Nom :</label>
+            <input class="form__name__input" type="text" name="name" id="name" :value="gifData.name" @change="modifyGifData">
             
         </div>
-        <div class="form__password">
-            <div class="label">
-                <label class="form__password__label" for="password">Mot de passe :</label>
-            </div>            
-            <input class="form__password__input" type="password" name="password" id="password" :value="loginData.password" @change="modifyLoginData">            
+        <div class="form__gif">
+            <label class="form__gif__label" for="password">Gif :</label>
+            <input type="file" class="form__gif__input" name="gif" id="gif" accept="image/gif"  @change="modifyGifFile">       
         </div>
     </form>
 </template>
@@ -22,26 +18,29 @@ import { mapState } from 'vuex';
 
 export default {
     methods: {
-        modifyLoginData(e) {
-            this.$store.commit('MODIFY_LOGIN_DATA', {
+        modifyGifData(e) {
+            this.$store.commit('MODIFY_GIF_DATA', {
                 element: e.target.name,
                 value: e.target.value
             })
+        },
+        modifyGifFile(){
+            this.$store.commit('MODIFY_GIF_FILE');
         }
     },
     computed: {
-        ...mapState([ 'loginData' ]),
-    }
+        ...mapState([ 'gifData' ]),
+    }    
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .form{
         display: flex;
         justify-content: center;
         flex-direction: column;
         gap: 20px;
-        &__email, &__password{
+        &__name, &__gif{
             display: flex;
             justify-content: center;
             flex-direction: column;
@@ -59,7 +58,7 @@ export default {
         line-height: 40px;
     }
 
-    input {
+    input, textarea {
         width: 400px;
         height: 30px;
         font-size: 1.2em;
@@ -77,16 +76,7 @@ export default {
         margin-top: 30px;        
     }
 
-    .label {
-        display: flex;
-        width: 415px;
-        height: 40px;
-    }
-
-    .error {
-        width: 100%;
-        height: 100%;
-        color: #FD2D01;
-        font-weight: bold;
+    #gif{
+        padding-top: 2px;
     }
 </style>

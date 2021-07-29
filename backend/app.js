@@ -18,7 +18,7 @@ const app = express();
 
 //Utilisation de helmet et bodyparser
 app.use(helmet());
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '5mb'}));
 app.use(cors());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));

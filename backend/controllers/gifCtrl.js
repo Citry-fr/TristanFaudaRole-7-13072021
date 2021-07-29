@@ -4,6 +4,7 @@ const fs = require('fs');
 
 // Route pour poster un gif
 exports.postGif = (req, res, next) => {
+    console.log(req.headers);
     const gif = new Gif({
         ...req.body,
         gifUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`

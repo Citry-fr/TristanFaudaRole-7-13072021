@@ -38,6 +38,7 @@ exports.login = (req, res, next) => {
                         rank: user.rank,
                         firstname: user.firstname,
                         lastname: user.lastname,
+                        userId: user.id,
                         token: jwt.sign(
                             {
                                 userId: user.id,

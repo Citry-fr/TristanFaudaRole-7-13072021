@@ -1,5 +1,5 @@
 <template>
-  <p>Page affichage de tout les gifs</p>
+  <p>Page d'affichage des gifs</p>
 </template>
 
 

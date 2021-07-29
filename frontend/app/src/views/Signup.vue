@@ -23,7 +23,7 @@ export default {
         return {
         }
     },
-    methods: {    
+    methods: {
         getValid() {
             const values = Object.values(this.isValid);
             return !values.some(v => v !== true);

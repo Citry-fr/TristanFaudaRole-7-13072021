@@ -96,8 +96,13 @@ export default {
   },
   computed: {
     rankChecker(){
-      const rank = parseInt(localStorage.getItem('rank'));
-      return rank === ADMIN_RANK;
+      if(localStorage.getItem('User') !== null){
+        const data = JSON.parse(localStorage.getItem('User'));
+        return data.rank === ADMIN_RANK;
+      } else {
+        return 0;
+      }
+      
     },
     logChecker(){
       return localStorage.getItem('User') === null;

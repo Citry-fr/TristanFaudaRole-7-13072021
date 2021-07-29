@@ -4,21 +4,34 @@
             <div class="label">
                 <label class="form__email__label" for="email">Email :</label>
             </div>
-            <input class="form__email__input" type="email" name="email" id="email" >
+            <input class="form__email__input" type="email" name="email" id="email" :value="loginData.email" @change="modifyLoginData">
             
         </div>
         <div class="form__password">
             <div class="label">
                 <label class="form__password__label" for="password">Mot de passe :</label>
             </div>            
-            <input class="form__password__input" type="password" name="password" id="password" >            
+            <input class="form__password__input" type="password" name="password" id="password" :value="loginData.password" @change="modifyLoginData">            
         </div>
     </form>
 </template>
 
 <script>
+
+import { mapState } from 'vuex';
+
 export default {
-    
+    methods: {
+        modifyLoginData(e) {
+            this.$store.commit('MODIFY_LOGIN_DATA', {
+                element: e.target.name,
+                value: e.target.value
+            })
+        }
+    },
+    computed: {
+        ...mapState([ 'loginData' ]),
+    }
 }
 </script>
 

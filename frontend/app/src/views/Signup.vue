@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Formulaire d'inscription</h1>
+        <h1>Inscription</h1>
         <SignupForm ref="form" />
         <Bouton text="S'inscrire" class="bouton" :valid="!getValid()" v-on:submit="postData"/>
     </div>

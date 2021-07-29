@@ -12,11 +12,13 @@
       </div>
       <img src="./assets/icon-left-font-monochrome-black.svg" alt="logo Groupomania">
       <div>
+        <p v-if="!logChecker">Bienvenue {{ getUserName }} !</p>
         <span>|</span>
-        <router-link to="/login">Se connecter</router-link>
+        <router-link to="/login" v-if="logChecker">Se connecter</router-link>
+        <a href="/" @click="disconnect" v-if="!logChecker">Déconnexion</a>
         <span>|</span>
-        <router-link to="/signup">S'inscrire</router-link>
-        <span>|</span>
+        <router-link to="/signup" v-if="logChecker">S'inscrire</router-link>
+        <span v-if="logChecker">|</span>
       </div>
 
       
@@ -74,6 +76,10 @@ span{
   color: #FD2D01;
   font-size: 1.5em;
 }
+
+p {
+  font-weight: bold;
+}
 </style>
 
 <script>
@@ -82,11 +88,24 @@ const ADMIN_RANK = 1;
 
 
 export default {
+  methods: {
+    disconnect(){
+      localStorage.removeItem('User');
+      location.reload();
+    }
+  },
   computed: {
     rankChecker(){
       const rank = parseInt(localStorage.getItem('rank'));
       return rank === ADMIN_RANK;
-    }
+    },
+    logChecker(){
+      return localStorage.getItem('User') === null;
+    },
+    getUserName(){
+      const data = JSON.parse(localStorage.getItem('User'));
+      return `${data.firstname} ${data.lastname}`;
+    }    
   }
 }
 </script>

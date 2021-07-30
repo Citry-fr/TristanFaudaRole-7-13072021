@@ -5,6 +5,7 @@ import PostGif from '../views/PostGif.vue'
 import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import Admin from '../views/Admin.vue'
+import Gif from '../views/Gif.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/admin',
     name: 'Admin',
     component: Admin
+  },
+  {
+    path: '/gif/:id',
+    name: 'Gif',
+    component: Gif
   }
 ]
 

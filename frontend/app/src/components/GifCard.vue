@@ -1,19 +1,28 @@
 <template>
-  <div class="card">
-      <img src="../assets/test.gif" alt="gif" class="card__gif">
-      <div class="card__infos">
-          <h2 class="card__infos__title">gif title</h2>
-          <div class="card__infos__side">
-              <p class="card__infos__side__author">gif author</p>
-              <p class="card__infos__side__coms">com n°</p>
-          </div>
-      </div>
+  <div class="card">      
+    <div class="card__gifbox">
+        <img :src="gifUrl" alt="gif" class="card__gifbox__gif">
+    </div>    
+    <div class="card__infos">
+        <h2 class="card__infos__title">{{ name }}</h2>
+        <div class="card__infos__side">
+            <p class="card__infos__side__author">{{`${firstname} ${lastname}`}}</p>
+            <p class="card__infos__side__coms">{{ com }}</p>
+        </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'GifCard'
+    name: 'GifCard',
+    props :{
+        name: String,
+        firstname: String,
+        lastname: String,
+        com: Number,
+        gifUrl: String
+    }
 
 }
 </script>
@@ -21,11 +30,13 @@ export default {
 <style lang="scss" scoped>
     .card{
         width: 400px;
+        height: 310px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         border-radius: 15px;
         border: 2px solid #2c3e50;
+        padding: 0;
         &__infos {
             display: flex;
             justify-content: space-between;
@@ -37,12 +48,17 @@ export default {
                 padding-right: 10px;
             }
         }
-        &__gif {
-            width: 100%;
-            height: 100%;
-            border-radius: 12px 12px 0 0;
-            object-fit: cover;
-            margin-top: -1px;
+        &__gifbox {
+            width: 400px;
+            height: 220px;
+            &__gif {
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+                border-radius: 12px 12px 0 0;
+                border-bottom: #2c3e50 2px solid;
+            }
         }
+       
     }
 </style>

@@ -123,13 +123,8 @@ export default new Vuex.Store({
     },
     postGif() {
       const user = JSON.parse(localStorage.getItem('User'))
-      var myHeaders = new Headers();
+      const myHeaders = new Headers();
       myHeaders.append("Authorization", `Bearer ${user.token}`);
-
-      // var raw = JSON.stringify({
-      //   name: this.state.gifData.name,
-      //   userId: user.userId,
-      // });
 
       const formData = new FormData();
 
@@ -138,7 +133,7 @@ export default new Vuex.Store({
       formData.append("userId", user.userId);
 
 
-      var requestOptions = {
+      const requestOptions = {
         method: 'POST',
         headers: myHeaders,
         body: formData,
@@ -147,7 +142,9 @@ export default new Vuex.Store({
 
       fetch("http://localhost:3000/api/gif/", requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
+        .then(result => {
+          console.log(result);
+          router.push({name: 'AllGifs'})})
         .catch(error => console.log('error', error));
     },
   },

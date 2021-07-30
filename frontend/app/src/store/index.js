@@ -31,6 +31,9 @@ export default new Vuex.Store({
     gifData: {
       name: "",
       gif: ""
+    },
+    allGifs: {
+
     }
   },
   mutations: {
@@ -147,6 +150,26 @@ export default new Vuex.Store({
           router.push({name: 'AllGifs'})})
         .catch(error => console.log('error', error));
     },
+    getAllGifs() {
+      const user = JSON.parse(localStorage.getItem('User'))
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${user.token}`);
+
+      var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+
+      fetch("http://localhost:3000/api/gif/", requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          console.log(result);
+          this.state.allGifs = JSON.parse(result);
+          console.log(this.state.allGifs);
+        })
+        .catch(error => console.log('error', error));
+          }
   },
   modules: {
   }

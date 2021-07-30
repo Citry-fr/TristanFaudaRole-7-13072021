@@ -10,7 +10,7 @@
         <router-link to="/admin" v-if="rankChecker">Admin</router-link>
         <span v-if="rankChecker">|</span>
       </div>
-      <img src="./assets/icon-left-font-monochrome-black.svg" alt="logo Groupomania">
+      <img src="./assets/icon-left-font-monochrome-black.svg" alt="logo Groupomania" class="logo">
       <div>
         <p v-if="!logChecker">Bienvenue {{ getUserName }} !</p>
         <span>|</span>
@@ -39,7 +39,7 @@
   color: #2c3e50;
 }
 
-img {
+.logo {
   width: 250px;
   position: absolute;
   left: 50%;

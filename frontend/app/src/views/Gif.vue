@@ -6,8 +6,8 @@
     <div>
       <PostComment />
     </div>
-    <div>
-      <Comment class="com" />
+    <div class="allComs">
+      <Comment class="com" v-for="comment in oneGif.comments" v-bind:key="comment.id" :firstname="comment.user.firstname" :lastname="comment.user.lastname" :text="comment.text"/>
     </div>
   </div>  
 </template>
@@ -59,8 +59,11 @@ export default {
       border-color: #FD2D01;
     }
   }
-
   .com{
     margin-top: 30px;
+  }
+  .allComs{
+    display: flex;
+    flex-direction: column-reverse;
   }
 </style>

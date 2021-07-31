@@ -37,6 +37,9 @@ export default new Vuex.Store({
     },
     oneGif: {
 
+    },
+    comData: {
+      text: ""
     }
   },
   mutations: {
@@ -54,6 +57,9 @@ export default new Vuex.Store({
     },
     MODIFY_GIF_FILE(state){
       state.gifData.gif = document.getElementById('gif').files[0];
+    },
+    MODIFY_COM_DATA(state){
+      state.comData.text = document.getElementById('comment').value;
     }
   },
   actions: {
@@ -196,6 +202,33 @@ export default new Vuex.Store({
           })
         .catch(error => console.log('error', error));
     },
+    postCom(){
+      const user = JSON.parse(localStorage.getItem('User'))
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${user.token}`);
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        text: this.state.comData.text,
+        userId: user.userId,
+        status: 0
+      });
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+
+      fetch("http://localhost:3000/api/com/1", requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          console.log(result);
+          window.location.reload();
+        })
+        .catch(error => console.log('error', error));
+          }
   },
 
     

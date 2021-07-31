@@ -1,13 +1,18 @@
 <template>
   <div class="comCard">
-      <p class="comCard__user">Connard de merde :</p>
-      <p class="comCard__com"><span class="comCard__com__dash">-</span> efbihjzalbfiezbfiezjjienognoeingrjebvhrebgrhuegbriue</p>
+      <p class="comCard__user">{{`${firstname} ${lastname}`}} :</p>
+      <p class="comCard__com"><span class="comCard__com__dash">-</span> {{ text }}</p>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'Comment'
+    name: 'Comment',
+    props: {
+        firstname: String,
+        lastname: String,
+        text: String
+    }
 }
 </script>
 

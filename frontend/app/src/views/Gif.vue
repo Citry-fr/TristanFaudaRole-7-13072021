@@ -3,8 +3,16 @@
 </template>
 
 <script>
-export default {
 
+import {mapActions} from 'vuex';
+
+export default {
+  methods: {
+    ...mapActions(['getOneGif']),
+  },
+  beforeMount() {
+    this.getOneGif();
+  }
 }
 </script>
 

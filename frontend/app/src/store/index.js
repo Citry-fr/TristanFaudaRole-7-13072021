@@ -34,6 +34,9 @@ export default new Vuex.Store({
     },
     allGifs: {
 
+    },
+    oneGif: {
+
     }
   },
   mutations: {
@@ -169,8 +172,34 @@ export default new Vuex.Store({
           console.log(this.state.allGifs);
         })
         .catch(error => console.log('error', error));
-          }
+    },
+    getOneGif(){
+      const user = JSON.parse(localStorage.getItem('User'))
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${user.token}`);
+
+      var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+
+      const url = window.location.href;
+      const gifId = url.split('gif/')[1];
+      console.log(gifId);
+
+      fetch(`http://localhost:3000/api/gif/${gifId}`, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            this.state.oneGif = JSON.parse(result);
+            console.log(this.state.oneGif);
+          })
+        .catch(error => console.log('error', error));
+    },
   },
+
+    
+
   modules: {
   }
 })

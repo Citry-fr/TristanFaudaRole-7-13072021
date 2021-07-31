@@ -19,9 +19,7 @@
         <span>|</span>
         <router-link to="/signup" v-if="logChecker">S'inscrire</router-link>
         <span v-if="logChecker">|</span>
-      </div>
-
-      
+      </div>      
     </div>
     <router-view/>
   </div>
@@ -52,13 +50,13 @@
   border-bottom: #2c3e50 2px solid;
   padding: 30px 0 30px 0;
   align-items: center;
+  height: 33px;
 }
 
 #nav div{
   display: flex;
   gap: 15px;
   align-items: center;
-  margin: auto;
 }
 
 #nav a {

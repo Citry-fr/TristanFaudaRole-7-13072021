@@ -7,7 +7,7 @@
         <h2 class="card__infos__title">{{ name }}</h2>
         <div class="card__infos__side">
             <p class="card__infos__side__author">{{`${firstname} ${lastname}`}}</p>
-            <p class="card__infos__side__coms">{{ com }}</p>
+            <p class="card__infos__side__coms"><font-awesome-icon icon="comments" class="card__infos__side__coms__icon"/>{{ com }}</p>
         </div>
     </div>
   </div>
@@ -46,6 +46,13 @@ export default {
             }
             &__side{
                 padding-right: 10px;
+                &__coms{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                    
+                }
             }
         }
         &__gifbox {

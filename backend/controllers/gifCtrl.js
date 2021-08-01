@@ -4,7 +4,7 @@ const fs = require('fs');
 
 // Route pour poster un gif
 exports.postGif = (req, res, next) => {
-    console.log(req.headers);
+    console.log(req.body);
     const gif = new Gif({
         ...req.body,
         gifUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
@@ -39,6 +39,7 @@ exports.getAllGifs = (req, res, next) => {
 
 // Route pour supprimer un gif
 exports.deleteGif = (req, res, next) => {
+    console.log(req.body);
     Comment.destroy({where: {gifId: req.params.gifId}})
         .then(() => {
             Gif.findOne({where: {id: req.params.gifId}})

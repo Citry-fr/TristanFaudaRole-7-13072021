@@ -36,6 +36,7 @@ export default {
                 height: 80px;
                 resize: none;
             }
+
         }
         &__title{
             text-decoration-line: underline;

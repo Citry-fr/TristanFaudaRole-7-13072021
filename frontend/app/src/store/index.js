@@ -108,6 +108,7 @@ export default new Vuex.Store({
         .catch(error => console.log('error', error));
         
     },
+
     postLogin() {
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
@@ -133,10 +134,11 @@ export default new Vuex.Store({
         })
         .catch(error => console.log('error', error));
     },
+
     postGif() {
       const user = JSON.parse(localStorage.getItem('User'))
       const myHeaders = new Headers();
-      myHeaders.append("Authorization", `Bearer ${user.token}`);
+      myHeaders.append("Authorization", `Bearer ${user.token} ${user.userId}`);
 
       const formData = new FormData();
 
@@ -156,10 +158,13 @@ export default new Vuex.Store({
         .then(response => response.text())
         .then(result => {
           console.log(result);
-          router.push({name: 'AllGifs'})})
+          router.push({name: 'AllGifs'});
+        })
         .catch(error => console.log('error', error));
     },
+
     getAllGifs() {
+      if(localStorage.getItem('User') !== null){
       const user = JSON.parse(localStorage.getItem('User'))
       var myHeaders = new Headers();
       myHeaders.append("Authorization", `Bearer ${user.token}`);
@@ -178,7 +183,9 @@ export default new Vuex.Store({
           console.log(this.state.allGifs);
         })
         .catch(error => console.log('error', error));
+      }
     },
+
     getOneGif(){
       const user = JSON.parse(localStorage.getItem('User'))
       var myHeaders = new Headers();
@@ -202,10 +209,11 @@ export default new Vuex.Store({
           })
         .catch(error => console.log('error', error));
     },
+
     postCom(){
       const user = JSON.parse(localStorage.getItem('User'))
       var myHeaders = new Headers();
-      myHeaders.append("Authorization", `Bearer ${user.token}`);
+      myHeaders.append("Authorization", `Bearer ${user.token} ${user.userId}`);
       myHeaders.append("Content-Type", "application/json");
 
       var raw = JSON.stringify({
@@ -221,14 +229,38 @@ export default new Vuex.Store({
         redirect: 'follow'
       };
 
-      fetch("http://localhost:3000/api/com/1", requestOptions)
+      const gifId = this.state.oneGif.id
+      fetch(`http://localhost:3000/api/com/${gifId}`, requestOptions)
         .then(response => response.text())
         .then(result => {
           console.log(result);
           window.location.reload();
         })
         .catch(error => console.log('error', error));
-          }
+    },
+
+    deleteGif() {
+      const user = JSON.parse(localStorage.getItem('User'))
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${user.token} ${user.userId}`);
+
+      var requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders,
+        body: JSON.stringify({
+          userId: user.userId,
+        }),
+        redirect: 'follow'
+      };
+      const gifId = this.state.oneGif.id
+      fetch(`http://localhost:3000/api/gif/${gifId}/`, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          console.log(result);
+          router.push({name: 'AllGifs'});
+        })
+        .catch(error => console.log('error', error));
+    },    
   },
 
     

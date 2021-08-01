@@ -2,12 +2,15 @@
   <div>
     <router-link to="/" class="back">Retour</router-link>
     <h1>{{this.oneGif.name}}</h1>
-    <img :src="this.oneGif.gifUrl" :alt="this.oneGif.name" class="gif">
+    <div class="gifBox">
+      <img :src="this.oneGif.gifUrl" :alt="this.oneGif.name" class="gifBox__gif">
+      <button class="gifBox__del" @click="deleteGif" v-if="checkId || rankChecker">Supprimer</button>
+    </div>    
     <div>
       <PostComment />
     </div>
     <div class="allComs">
-      <Comment class="com" v-for="comment in oneGif.comments" v-bind:key="comment.id" :firstname="comment.user.firstname" :lastname="comment.user.lastname" :text="comment.text"/>
+      <Comment class="com" v-for="comment in oneGif.comments" v-bind:key="comment.id" :firstname="comment.user.firstname" :lastname="comment.user.lastname" :text="comment.text" v-on:submit="deleteCom(comment.id)" :isAuthor="comment.userId === getId"/>
     </div>
   </div>  
 </template>
@@ -23,10 +26,53 @@ export default {
     PostComment
   },
   methods: {
-    ...mapActions(['getOneGif']),
+    ...mapActions(['getOneGif', 'deleteGif', 'deleteCom']),
+    deleteCom(comId){
+      const user = JSON.parse(localStorage.getItem('User'))
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${user.token} ${user.userId}`);
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        "userId": 1
+      });
+
+      var requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+
+      console.log(comId);
+
+      fetch(`http://localhost:3000/api/com/${comId}`, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          console.log(result);
+          window.location.reload();
+        })
+        .catch(error => console.log('error', error));
+    },
   },
   computed: {
-    ...mapState(['oneGif']),    
+    ...mapState(['oneGif']),
+    checkId() {
+      const user = JSON.parse(localStorage.getItem('User'));
+      return this.oneGif.userId === user.userId;
+    },
+    rankChecker(){
+      if(localStorage.getItem('User') !== null){
+        const data = JSON.parse(localStorage.getItem('User'));
+        return data.rank === 1;
+      } else {
+        return 0;
+      }
+    },
+    getId() {
+      const user = JSON.parse(localStorage.getItem('User'));
+      return user.userId;
+    }
   },
   beforeMount() {
     this.getOneGif();
@@ -35,13 +81,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .gif{
-    width: 650px;
-    height: 365px;
-    object-fit: cover;
-    border-radius: 10px;
-    border: 2px solid #2c3e50;
-  }
+  
   .back{
     position: absolute;
     display: flex;
@@ -65,5 +105,33 @@ export default {
   .allComs{
     display: flex;
     flex-direction: column-reverse;
+  }
+  .gifBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    &__gif{
+      width: 650px;
+      height: 365px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid #2c3e50;
+    }
+    &__del{
+      padding: 10px;
+      font-weight: bold;
+      font-family: 'Nunito', sans-serif;
+      border: 2px solid #FD2D01;
+      color: #FD2D01;
+      border-radius: 10px;
+      cursor: pointer;
+      &:hover{
+        background-color: lightcoral;
+        color: red;
+      }
+    }
+
   }
 </style>

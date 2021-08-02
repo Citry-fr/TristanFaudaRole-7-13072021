@@ -64,7 +64,7 @@ const routes = [
     component: ModifCom
   },
   {
-    path: '/gif/:id/modif',
+    path: '/gif/modif/:id',
     name: 'ModifGif',
     component: ModifGif
   }

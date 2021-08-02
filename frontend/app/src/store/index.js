@@ -50,6 +50,9 @@ export default new Vuex.Store({
     gifDataModif: {
       name: "",
       gif: ""
+    },
+    pendingComs: {
+
     }
   },
   mutations: {
@@ -356,9 +359,31 @@ export default new Vuex.Store({
           console.log(result);
           router.push({name: 'AllGifs'});
           this.state.allGifs = "";
+          this.state.oneGif = "";
         })
         .catch(error => console.log('error', error));
     },
+
+    getPendingComs(){
+      const user = JSON.parse(localStorage.getItem('User'))
+      const myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${user.token} ${user.userId}`);
+
+      var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+
+      fetch("http://localhost:3000/api/com/admin/comment", requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          console.log(result);
+          this.state.pendingComs = result;
+        })
+        .catch(error => console.log('error', error));
+    },
+    
     
   },
 

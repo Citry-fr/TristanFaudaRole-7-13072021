@@ -35,7 +35,7 @@ exports.deleteComment = (req, res, next) => {
 
 //Route pour récuperer tout les commentaire en attente de validation par l'admin
 exports.getPendingComment = (req, res, next) => {
-    Comment.findAll({ where: {status: 0}})
+    Comment.findAll({ where: {status: 0}, include: [User]})
         .then(coms => res.json(coms))
         .catch(error => res.status(400).json({ error }));
 }
@@ -52,7 +52,7 @@ exports.acceptComment = (req, res, next) => {
             .then(() => res.status(200).json({ message: "Commentaire Accepté !"}))
             .catch(error => res.status(401).json({ error }));
 }
-
+//Route pour récupérer un commentaire grace a son ID
 exports.getOneCom = (req, res, next) => {
     Comment.findOne({where: {id: req.params.id}, include : [User]})
     .then(com => res.json(com))

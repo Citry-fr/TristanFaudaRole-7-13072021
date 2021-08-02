@@ -15,7 +15,7 @@
         <p v-if="!logChecker">Bienvenue {{ getUserName }} !</p>
         <span>|</span>
         <router-link to="/login" v-if="logChecker">Se connecter</router-link>
-        <a href="#/allgifs" @click="disconnect" v-if="!logChecker">Déconnexion</a>
+        <a href="/" @click="disconnect" v-if="!logChecker">Déconnexion</a>
         <span>|</span>
         <router-link to="/signup" v-if="logChecker">S'inscrire</router-link>
         <span v-if="logChecker">|</span>

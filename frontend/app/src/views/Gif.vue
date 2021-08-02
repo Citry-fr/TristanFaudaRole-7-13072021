@@ -2,11 +2,11 @@
   <div>
     <router-link to="/" class="back">Retour</router-link>
     <h1>{{this.oneGif.name}}</h1>
-    <div class="gifBox">
-      <img :src="this.oneGif.gifUrl" :alt="this.oneGif.name" class="gifBox__gif">
+    <div class="gifBox" >
+      <img :src="oneGif.gifUrl" :alt="oneGif.name" class="gifBox__gif">
       <div class="gifBox__button" v-if="checkId || rankChecker">
         <button class="gifBox__button__del" @click="deleteGif" >Supprimer</button>
-        <router-link :to="{name: 'ModifGif', params: {id: this.oneGif.id}}" class="gifBox__button__modif">Modifier</router-link>
+        <router-link :to="{name: 'ModifGif', params: {id: oneGif.id}}" class="gifBox__button__modif">Modifier</router-link>
       </div>
 
     </div>    
@@ -40,6 +40,11 @@ export default {
   components: {
     Comment,
     PostComment
+  },
+  data() {
+    return {
+      gifId: this.getGifId,
+    }
   },
   methods: {
     ...mapActions(['getOneGif', 'deleteGif', 'deleteCom']),

@@ -40,6 +40,9 @@ export default new Vuex.Store({
     },
     comData: {
       text: ""
+    },
+    oneCom: {
+
     }
   },
   mutations: {
@@ -261,6 +264,56 @@ export default new Vuex.Store({
         })
         .catch(error => console.log('error', error));
     },    
+
+    getOneCom(){
+      const user = JSON.parse(localStorage.getItem('User'));
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${user.token}`);
+
+      var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+
+      const url = window.location.href;
+      const comId = url.split('com/')[1];
+      console.log(comId);
+      fetch(`http://localhost:3000/api/com/${comId}`, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            this.state.oneCom = JSON.parse(result);
+            console.log(this.state.oneCom);
+          })
+        .catch(error => console.log('error', error));
+    },
+
+    modifyCom(){
+      const user = JSON.parse(localStorage.getItem('User'));
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${user.token} ${user.userId}`);
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        text: this.state.comData.text,
+        userId: user.userId
+      });
+
+      var requestOptions = {
+        method: 'PUT',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+
+      fetch("http://localhost:3000/api/com/1/1", requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          console.log(result);
+          router.push({name: 'Gif', params: {id: this.state.oneCom.gifId}});
+        })
+        .catch(error => console.log('error', error));
+      }
   },
 
     

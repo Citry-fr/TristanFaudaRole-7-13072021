@@ -14,6 +14,7 @@ const auth = require('../middlewares/auth');
 router.post('/:gifId', auth, comCtrl.postComment);
 router.put('/:gifId/:comId', auth, comCtrl.modifyComment);
 router.delete('/:comId', auth, comCtrl.deleteComment);
+router.get('/:id', auth, comCtrl.getOneCom);
 
 //Définition des différente routes comment utilisable par l'admin
 router.get('/admin/comment', auth, comCtrl.getPendingComment);

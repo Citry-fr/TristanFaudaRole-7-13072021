@@ -1,5 +1,5 @@
 //Imprtation de model Comment après initialisation avec Sequelize
-const {Comment} = require('../sequelize');
+const {Comment, User} = require('../sequelize');
 
 //Route pour poster un commentaire
 exports.postComment = (req, res, next) => {
@@ -51,4 +51,10 @@ exports.acceptComment = (req, res, next) => {
         })
             .then(() => res.status(200).json({ message: "Commentaire Accepté !"}))
             .catch(error => res.status(401).json({ error }));
+}
+
+exports.getOneCom = (req, res, next) => {
+    Comment.findOne({where: {id: req.params.id}, include : [User]})
+    .then(com => res.json(com))
+    .catch(error => res.status(404).json({ error }));
 }

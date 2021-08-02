@@ -10,7 +10,7 @@
       <PostComment />
     </div>
     <div class="allComs">
-      <Comment class="com" v-for="comment in oneGif.comments" v-bind:key="comment.id" :firstname="comment.user.firstname" :lastname="comment.user.lastname" :text="comment.text" v-on:submit="deleteCom(comment.id)" :isAuthor="comment.userId === getId"/>
+      <Comment class="com" v-for="comment in oneGif.comments" v-bind:key="comment.id" :firstname="comment.user.firstname" :lastname="comment.user.lastname" :text="comment.text" v-on:submit="deleteCom(comment.id)" :isAuthor="comment.userId === getId" :comId="comment.id"/>
     </div>
   </div>  
 </template>

@@ -1,11 +1,12 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import AllGifs from '../views/AllGifs.vue'
-import PostGif from '../views/PostGif.vue'
-import Login from '../views/Login.vue'
-import Signup from '../views/Signup.vue'
-import Admin from '../views/Admin.vue'
-import Gif from '../views/Gif.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import AllGifs from '../views/AllGifs.vue';
+import PostGif from '../views/PostGif.vue';
+import Login from '../views/Login.vue';
+import Signup from '../views/Signup.vue';
+import Admin from '../views/Admin.vue';
+import Gif from '../views/Gif.vue';
+import Com from '../views/Com.vue';
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/gif/:id',
     name: 'Gif',
     component: Gif
+  },
+  {
+    path: '/com/:id',
+    name: 'Com',
+    component: Com
   }
 ]
 

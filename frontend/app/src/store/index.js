@@ -162,6 +162,7 @@ export default new Vuex.Store({
         .then(result => {
           console.log(result);
           router.push({name: 'AllGifs'});
+          this.state.gifData = "";
         })
         .catch(error => console.log('error', error));
     },

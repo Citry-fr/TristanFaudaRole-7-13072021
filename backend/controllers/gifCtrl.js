@@ -58,13 +58,33 @@ exports.deleteGif = (req, res, next) => {
 
 // Route pour modifier un gif
 exports.modifyGif = (req, res, next) => {
-    Gif.update(
-        {
-            ...req.body
-        },
-        {
-            where: {id: req.params.gifId}
-        }
-    ).then(() => res.status(200).json({ message: "Gif modifié !"}))
-     .catch(error => res.status(400).json({ error: error }));
+    if(req.file){
+        Gif.findOne({where: {id: req.params.gifId}})
+                .then(gif => {
+                    const filename = gif.gifUrl.split('/images/')[1];
+                    fs.unlink(`images/${filename}`, () => {
+                        Gif.update(
+                            {
+                                ...req.body,
+                                gifUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+                            },
+                            {
+                                where: {id: req.params.gifId}
+                            }
+                        ).then(() => res.status(200).json({ message: "Gif modifié !"}))
+                         .catch(error => res.status(400).json({ error: error }));
+                    });
+                })
+    } else {
+        Gif.update(
+            {
+                ...req.body
+            },
+            {
+                where: {id: req.params.gifId}
+            }
+        ).then(() => res.status(200).json({ message: "Gif modifié !"}))
+         .catch(error => res.status(400).json({ error: error }));
+    }
+
 }

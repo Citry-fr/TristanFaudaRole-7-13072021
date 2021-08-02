@@ -2,7 +2,7 @@
     <div class="post">
         <h2 class="post__title">Poster un commentaire :</h2>
         <div class="post__input">
-            <textarea class="post__input__text" name="comment" id="comment" cols="30" rows="10" @change="modifyComData">Écrivez votre commentaire !</textarea>
+            <textarea  class="post__input__text" name="comment" id="comment" cols="30" rows="10" @change="modifyComData" v-model="text" @click="clearText"></textarea>
             <Bouton class="post__input__button" text="Poster" v-on:submit="postCom"/>
         </div>
     </div>
@@ -16,10 +16,18 @@ export default {
     components: {
         Bouton
     },
+    data() {
+        return {
+            text: "Écrivez votre commentaire !"
+        }
+    },
     methods: {
         ...mapActions(['postCom']),
         modifyComData() {
             this.$store.commit('MODIFY_COM_DATA');
+        },
+        clearText(){
+            this.text = "";
         }
     }
 }

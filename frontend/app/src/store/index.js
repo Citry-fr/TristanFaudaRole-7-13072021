@@ -61,11 +61,13 @@ export default new Vuex.Store({
     MODIFY_LOGIN_DATA(state, {element, value}){
       state.loginData[element] = value;
     },
-    MODIFY_GIF_DATA(state, {value}){
-      state.gifData.name = value;
+    MODIFY_GIF_DATA(state, {element, value}){
+      state.gifData[element] = value;
+      console.log(state.gifData[element]);
     },
     MODIFY_GIF_FILE(state){
       state.gifData.gif = document.getElementById('gif').files[0];
+      console.log(state.gifData.gif);
     },
     MODIFY_COM_DATA(state){
       state.comData.text = document.getElementById('comment').value;
@@ -309,7 +311,8 @@ export default new Vuex.Store({
 
       var raw = JSON.stringify({
         text: this.state.comData.text,
-        userId: user.userId
+        userId: user.userId,
+        status: 0
       });
 
       var requestOptions = {

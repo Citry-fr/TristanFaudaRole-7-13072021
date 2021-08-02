@@ -1,7 +1,7 @@
 <template>
-  <div class="comCard">      
+  <div class="comCard">           
       <div class="comCard__text">
-            <p class="comCard__text__user">{{`${firstname} ${lastname}`}} :</p>
+            <p class="comCard__text__user">{{`${firstname} ${lastname}`}} :<span class="comCard__text__user__valid" v-if="isAccepted">(Commentaire en attente de validation)</span></p>
             <p class="comCard__text__com"><span class="comCard__com__dash">-</span> {{ text }}</p>
       </div>
       <div class="comCard__button" v-if="isAuthor">
@@ -19,7 +19,8 @@ export default {
         lastname: String,
         text: String,
         isAuthor: Boolean,
-        comId: Number
+        comId: Number,
+        isAccepted: Boolean
     },
     methods:{
         submitEvent() {
@@ -50,6 +51,13 @@ export default {
                 font-size: 1.2em;
                 text-decoration-line: underline;
                 text-decoration-color: #FD2D01;
+                &__valid{
+                    font-size: 0.8em;
+                    display: inline-block;
+                    color: #2c3e50;
+                    margin-left: 20px;
+                    font-style: oblique;
+                }
             }
             &__com{
                 margin: 0;

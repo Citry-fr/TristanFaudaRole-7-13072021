@@ -15,7 +15,17 @@
     </div>
     <div class="allComs">
       <div v-for="comment in oneGif.comments" v-bind:key="comment.id">
-        <Comment class="com"  :firstname="comment.user.firstname" :lastname="comment.user.lastname" :text="comment.text" v-on:submit="deleteCom(comment.id)" :isAuthor="comment.userId === getId" :comId="comment.id" v-if="comment.status === 1"/>
+        <Comment 
+          class="com"
+          :firstname="comment.user.firstname"
+          :lastname="comment.user.lastname"
+          :text="comment.text"
+          v-on:submit="deleteCom(comment.id)"
+          :isAuthor="comment.userId === getId"
+          :comId="comment.id"
+          v-if="comment.status === 1 || comment.userId == getId"
+          :isAccepted="comment.status === 0"
+        />
       </div>
     </div>
   </div>  

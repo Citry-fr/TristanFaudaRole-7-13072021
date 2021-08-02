@@ -29,7 +29,7 @@ export default {
             return localStorage.getItem('User') === null;
         },
         checkField() {
-            return (this.gifData.name === '' || this.gifData.desc === '' || this.gifData.gif === '');
+            return (this.gifData.name === '' || this.gifData.gif === '');
         }
     },
     computed: {

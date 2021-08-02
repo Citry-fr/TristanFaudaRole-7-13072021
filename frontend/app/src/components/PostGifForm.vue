@@ -20,11 +20,12 @@ export default {
     methods: {
         modifyGifData(e) {
             this.$store.commit('MODIFY_GIF_DATA', {
+                element: e.target.name,
                 value: e.target.value
             })
         },
         modifyGifFile(){
-            this.$store.commit('MODIF_GIF_FILE');
+            this.$store.commit('MODIFY_GIF_FILE');
         }
     },
     computed: {

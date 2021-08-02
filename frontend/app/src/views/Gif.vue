@@ -14,7 +14,9 @@
       <PostComment />
     </div>
     <div class="allComs">
-      <Comment class="com" v-for="comment in oneGif.comments" v-bind:key="comment.id" :firstname="comment.user.firstname" :lastname="comment.user.lastname" :text="comment.text" v-on:submit="deleteCom(comment.id)" :isAuthor="comment.userId === getId" :comId="comment.id"/>
+      <div v-for="comment in oneGif.comments" v-bind:key="comment.id">
+        <Comment class="com"  :firstname="comment.user.firstname" :lastname="comment.user.lastname" :text="comment.text" v-on:submit="deleteCom(comment.id)" :isAuthor="comment.userId === getId" :comId="comment.id" v-if="comment.status === 1"/>
+      </div>
     </div>
   </div>  
 </template>
@@ -76,7 +78,7 @@ export default {
     getId() {
       const user = JSON.parse(localStorage.getItem('User'));
       return user.userId;
-    }
+    },
   },
   beforeMount() {
     this.getOneGif();

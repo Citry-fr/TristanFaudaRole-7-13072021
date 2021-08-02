@@ -3,11 +3,11 @@
     <div id="nav">
       <div>
         <span>|</span>
-        <router-link to="/">Les Gifs</router-link>
+        <router-link to="/allgifs">Les Gifs</router-link>
         <span>|</span>
         <router-link to="/postgif">Poster un Gif</router-link>
         <span>|</span>
-        <router-link to="/admin" v-if="rankChecker">Admin</router-link>
+        <router-link to="/admin/" v-if="rankChecker">Admin</router-link>
         <span v-if="rankChecker">|</span>
       </div>
       <img src="./assets/icon-left-font-monochrome-black.svg" alt="logo Groupomania" class="logo">
@@ -15,7 +15,7 @@
         <p v-if="!logChecker">Bienvenue {{ getUserName }} !</p>
         <span>|</span>
         <router-link to="/login" v-if="logChecker">Se connecter</router-link>
-        <a href="/" @click="disconnect" v-if="!logChecker">Déconnexion</a>
+        <a href="#/allgifs" @click="disconnect" v-if="!logChecker">Déconnexion</a>
         <span>|</span>
         <router-link to="/signup" v-if="logChecker">S'inscrire</router-link>
         <span v-if="logChecker">|</span>
@@ -67,6 +67,10 @@
 }
 
 #nav a.router-link-exact-active {
+  color: #FD2D01;
+}
+
+#nav a.router-link-active {
   color: #FD2D01;
 }
 

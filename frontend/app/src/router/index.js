@@ -6,7 +6,8 @@ import Login from '../views/Login.vue';
 import Signup from '../views/Signup.vue';
 import Admin from '../views/Admin.vue';
 import Gif from '../views/Gif.vue';
-import Com from '../views/Com.vue';
+import ModifCom from '../views/ModifCom.vue';
+import ModifGif from '../views/ModifGif.vue';
 
 Vue.use(VueRouter)
 
@@ -43,8 +44,13 @@ const routes = [
   },
   {
     path: '/com/:id',
-    name: 'Com',
-    component: Com
+    name: 'ModifCom',
+    component: ModifCom
+  },
+  {
+    path: '/gif/:id/modif',
+    name: 'ModifGif',
+    component: ModifGif
   }
 ]
 

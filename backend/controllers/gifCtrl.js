@@ -58,6 +58,7 @@ exports.deleteGif = (req, res, next) => {
 
 // Route pour modifier un gif
 exports.modifyGif = (req, res, next) => {
+    console.log(req.body);
     if(req.file){
         Gif.findOne({where: {id: req.params.gifId}})
                 .then(gif => {

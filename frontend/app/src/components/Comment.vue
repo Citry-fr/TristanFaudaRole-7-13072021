@@ -6,7 +6,7 @@
       </div>
       <div class="comCard__button" v-if="isAuthor">
           <button class="comCard__button__del" @click="submitEvent">Supprimer</button>
-          <router-link :to="{name: 'Com', params: {id: comId}}" class="comCard__button__modif">Modifier</router-link>
+          <router-link :to="{name: 'ModifCom', params: {id: comId}}" class="comCard__button__modif">Modifier</router-link>
       </div>
   </div>
 </template>

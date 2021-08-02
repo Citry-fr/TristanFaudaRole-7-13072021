@@ -2,7 +2,7 @@
     <form class="form">
         <div class="form__name">
             <label class="form__name__label" for="name">Nom :</label>
-            <input class="form__name__input" type="text" name="name" id="name" :value="gifData.name" @change="modifyGifData">
+            <input class="form__name__input" type="text" name="name" id="name" :value="gifDataModif.name" @change="modifyGifName">
             
         </div>
         <div class="form__gif">
@@ -18,8 +18,8 @@ import { mapState } from 'vuex';
 
 export default {
     methods: {
-        modifyGifData(e) {
-            this.$store.commit('MODIFY_GIF_DATA', {
+        modifyGifName(e) {
+            this.$store.commit('MODIF_GIF_NAME', {
                 value: e.target.value
             })
         },
@@ -28,8 +28,13 @@ export default {
         }
     },
     computed: {
-        ...mapState([ 'gifData' ]),
-    }    
+        ...mapState([ 'oneGif', 'gifDataModif' ]),
+    },
+    beforeMount() {
+        this.$store.commit('MODIF_GIF_NAME', {
+                value: this.oneGif.name
+        });
+    }
 }
 </script>
 

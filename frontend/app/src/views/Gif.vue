@@ -4,7 +4,11 @@
     <h1>{{this.oneGif.name}}</h1>
     <div class="gifBox">
       <img :src="this.oneGif.gifUrl" :alt="this.oneGif.name" class="gifBox__gif">
-      <button class="gifBox__del" @click="deleteGif" v-if="checkId || rankChecker">Supprimer</button>
+      <div class="gifBox__button" v-if="checkId || rankChecker">
+        <button class="gifBox__button__del" @click="deleteGif" >Supprimer</button>
+        <router-link :to="{name: 'ModifGif', params: {id: this.oneGif.id}}" class="gifBox__button__modif">Modifier</router-link>
+      </div>
+
     </div>    
     <div>
       <PostComment />
@@ -119,17 +123,35 @@ export default {
       border-radius: 10px;
       border: 2px solid #2c3e50;
     }
-    &__del{
-      padding: 10px;
-      font-weight: bold;
-      font-family: 'Nunito', sans-serif;
-      border: 2px solid #FD2D01;
-      color: #FD2D01;
-      border-radius: 10px;
-      cursor: pointer;
-      &:hover{
-        background-color: lightcoral;
-        color: red;
+    &__button{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      &__del{
+        padding: 10px;
+        font-weight: bold;
+        font-family: 'Nunito', sans-serif;
+        border: 2px solid #FD2D01;
+        color: #FD2D01;
+        border-radius: 10px;
+        cursor: pointer;
+        &:hover{
+          background-color: lightcoral;
+          color: red;
+        }
+      }
+      &__modif{
+        text-decoration: none;
+        color: #2c3e50;
+        border: 2px solid #2c3e50;
+        border-radius: 10px;
+        padding: 8px;
+        font-weight: bold;
+        &:hover{
+          border-color: #FD2D01;
+          color: #FD2D01;
+        }
       }
     }
 

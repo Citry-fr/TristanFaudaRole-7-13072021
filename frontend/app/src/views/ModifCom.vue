@@ -8,6 +8,7 @@
 import {mapActions} from 'vuex';
 import ModifCom from '../components/ModifCom.vue'
 
+
 export default {
     components: {
         ModifCom

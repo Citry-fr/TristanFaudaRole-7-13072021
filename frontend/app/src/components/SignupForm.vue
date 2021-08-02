@@ -1,21 +1,5 @@
 <template>
     <form class="form">
-        <div class="form__email">
-            <div class="label">
-                <label class="form__email__label" for="email">Email :</label>
-                <p v-if="formData.email !== '' && !isValid.email" class="error" >Email incorrect</p>
-            </div>
-            <input class="form__email__input" type="email" name="email" id="email" :value="formData.email" @change="modifyData">
-            
-        </div>
-        <div class="form__password">
-            <div class="label">
-                <label class="form__password__label" for="password">Mot de passe :</label>
-                <p v-if="formData.password !== '' && !isValid.password" class="error" >Mot de passe incorrect</p>
-            </div>            
-            <input class="form__password__input" type="password" name="password" id="password" :value="formData.password" @change="modifyData">
-            
-        </div>
         <div class="form__firstname">
 
             <div class="label">
@@ -32,6 +16,31 @@
             </div>
             <input class="form__lastname__input" type="text" name="lastname" id="lastname" :value="formData.lastname" @change="modifyData">            
         </div>
+        <div class="form__email">
+            <div class="label">
+                <label class="form__email__label" for="email">Email :</label>
+                <p v-if="formData.email !== '' && !isValid.email" class="error" >Email incorrect</p>
+            </div>
+            <input class="form__email__input" type="email" name="email" id="email" :value="formData.email" @change="modifyData">
+            
+        </div>
+        <div class="form__password">
+            <div class="label">
+                <label class="form__password__label" for="password">Mot de passe :</label>
+                <p v-if="formData.password !== '' && !isValid.password" class="error" >Mot de passe incorrect</p>
+            </div>            
+            <input class="form__password__input" type="password" name="password" id="password" :value="formData.password" @change="modifyData">
+            
+        </div>
+        <div class="form__confPassword">
+            <div class="label">
+                <label class="form__confPassword__label" for="confPassword">Confirmation mot de passe :</label>
+                <p v-if="formData.confPassword !== '' && !isValid.confPassword" class="form__confPassword__error" >Incorrect</p>
+            </div>            
+            <input class="form__confPassword__input" type="password" name="confPassword" id="confPassword" :value="formData.confPassword" @change="modifyData">
+            
+        </div>
+        
     </form>
 </template>
 
@@ -66,11 +75,24 @@ export default {
         justify-content: center;
         flex-direction: column;
         gap: 20px;
-        &__email, &__password, &__firstname, &__lastname{
+        &__email, &__password, &__firstname, &__lastname, &__confPassword{
             display: flex;
             justify-content: center;
             flex-direction: column;
             align-items: center;
+        }
+        &__confPassword{
+            &__label{
+                font-size: 1.1em;
+                width: 300px;
+                
+            }
+            &__error{
+                    width: 100px;                    
+                    height: 100%;
+                    color: #FD2D01;
+                    font-weight: bold;
+                }
         }
               
     }

@@ -9,18 +9,21 @@ export default new Vuex.Store({
     formData: {
       email: "", 
       password: "",
+      confPassword: "",
       firstname: "",
       lastname: ""
     },
     regData: {
       email: /^[\w-.]+@([\w-]+[.])+[\w-]{2,4}$/,
       password: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+      confPassword: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
       firstname: /^[A-Za-zÀ-ü-']+$/,
       lastname: /^[A-Za-zÀ-ü-']+$/
     },
     isValid: {
       email: "", 
       password: "",
+      confPassword: "",
       firstname: "",
       lastname: ""
     },
@@ -43,26 +46,35 @@ export default new Vuex.Store({
     },
     oneCom: {
 
+    },
+    gifDataModif: {
+      name: "",
+      gif: ""
     }
   },
   mutations: {
     MODIFY_DATA(state, {element, value}){
       state.formData[element] = value;
       state.isValid[element] = state.regData[element].test(value);
+      state.isValid.confPassword = state.formData.password === state.formData.confPassword;
     },
     MODIFY_LOGIN_DATA(state, {element, value}){
       state.loginData[element] = value;
-      console.log(state.loginData);
     },
-    MODIFY_GIF_DATA(state, {element, value}){
-      state.gifData[element] = value;
-      console.log(state.gifData);
+    MODIFY_GIF_DATA(state, {value}){
+      state.gifData.name = value;
     },
     MODIFY_GIF_FILE(state){
       state.gifData.gif = document.getElementById('gif').files[0];
     },
     MODIFY_COM_DATA(state){
       state.comData.text = document.getElementById('comment').value;
+    },
+    MODIF_GIF_NAME(state, {value}){
+      state.gifDataModif.name = value;
+    },
+    MODIF_GIF_FILE(state){
+      state.gifDataModif.gif = document.getElementById('gif').files[0];
     }
   },
   actions: {
@@ -307,14 +319,44 @@ export default new Vuex.Store({
         redirect: 'follow'
       };
 
-      fetch("http://localhost:3000/api/com/1/1", requestOptions)
+      fetch(`http://localhost:3000/api/com/${this.state.oneCom.gifId}/${this.state.oneCom.id}`, requestOptions)
         .then(response => response.text())
         .then(result => {
           console.log(result);
           router.push({name: 'Gif', params: {id: this.state.oneCom.gifId}});
         })
         .catch(error => console.log('error', error));
-      }
+    },
+
+    modifyGif() {
+      const user = JSON.parse(localStorage.getItem('User'))
+      const myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${user.token} ${user.userId}`);
+
+      const formData = new FormData();
+
+      formData.append("gif", this.state.gifDataModif.gif);
+      formData.append("name", this.state.gifDataModif.name);
+      formData.append("userId", user.userId);
+
+
+      const requestOptions = {
+        method: 'PUT',
+        headers: myHeaders,
+        body: formData,
+        redirect: 'follow'
+      };
+
+      fetch(`http://localhost:3000/api/gif/${this.state.oneGif.id}`, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          console.log(result);
+          router.push({name: 'AllGifs'});
+          this.state.allGifs = "";
+        })
+        .catch(error => console.log('error', error));
+    },
+    
   },
 
     

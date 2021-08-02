@@ -16,7 +16,7 @@ router.post('/', auth, multer, gifCtrl.postGif);
 router.get('/:gifId', auth, gifCtrl.getGif);
 router.get('/', auth, gifCtrl.getAllGifs);
 router.delete('/:gifId', auth, gifCtrl.deleteGif);
-router.put('/:gifId', auth, gifCtrl.modifyGif);
+router.put('/:gifId', auth, multer, gifCtrl.modifyGif);
 
 //Export du router
 module.exports = router;

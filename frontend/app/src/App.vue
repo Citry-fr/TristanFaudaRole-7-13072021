@@ -1,7 +1,7 @@
 <template>
   <div id="app">    
     <div id="nav">
-      <div>
+      <div id="left">
         <span>|</span>
         <router-link to="/allgifs">Les Gifs</router-link>
         <span>|</span>
@@ -11,8 +11,8 @@
         <span v-if="rankChecker">|</span>
       </div>
       <img src="./assets/icon-left-font-monochrome-black.svg" alt="logo Groupomania" class="logo">
-      <div>
-        <p v-if="!logChecker">Bienvenue {{ getUserName }} !</p>
+      <div id="right">
+        <p class="welcom" v-if="!logChecker">Bienvenue {{ getUserName }} !</p>
         <span>|</span>
         <router-link to="/login" v-if="logChecker">Se connecter</router-link>
         <a href="/" @click="disconnect" v-if="!logChecker">Déconnexion</a>
@@ -25,7 +25,7 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
@@ -47,6 +47,7 @@
 #nav {
   display: flex;
   justify-content: space-around;
+  flex-direction: row;
   border-bottom: #2c3e50 2px solid;
   padding: 30px 0 30px 0;
   align-items: center;
@@ -79,8 +80,50 @@ span{
   font-size: 1.5em;
 }
 
-p {
+.welcom {
   font-weight: bold;
+}
+
+@media (max-width: 1470px) {
+  #nav{
+    flex-direction: column;
+    height: 140px;
+    padding-top: 0;
+  }
+  #left{
+    margin-top: 120px;
+  }
+  .logo{
+    transform: translateY(-20px) translateX(-50%)
+  }
+}
+@media (max-width: 420px){
+  #left{
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+  }
+  #right{
+    display: flex;
+    flex-direction: column-reverse;
+    margin-top: 20px;
+  }
+  #nav{
+    height: 260px;
+  }
+  span{
+    display: none;
+  }
+  .logo{
+    transform: translateY(-100px) translateX(-50%)
+  }
+  .welcom{
+    margin-top: 0;
+    border-bottom: 2px solid #FD2D01;
+  }
+  #nav a{
+    border-bottom: 2px solid #FD2D01;
+  }
 }
 </style>
 

@@ -53,6 +53,9 @@ export default new Vuex.Store({
     },
     pendingComs: {
 
+    },
+    allUsers: {
+
     }
   },
   mutations: {
@@ -114,17 +117,28 @@ export default new Vuex.Store({
       fetch("http://localhost:3000/api/auth/signup", requestOptions)
         .then(response => response.text())
         .then(result => {
-          console.log(result)
-          fetch("http://localhost:3000/api/auth/login", loginOptions)
-            .then(response => response.text())
-            .then(result => {
-              console.log(result);
-              localStorage.setItem('User', result);
-              router.push({name: 'AllGifs'})
-              location.reload();
-            })
-            .catch(error => console.log('error', error));
-            })
+          const signupResult = JSON.parse(result);
+              if(signupResult.error){
+                window.alert(signupResult.error);
+              } else {
+                fetch("http://localhost:3000/api/auth/login", loginOptions)
+                  .then(response => response.text())
+                  .then(result => {                    
+                    localStorage.setItem('User', result);
+                    router.push({name: 'AllGifs'});                    
+                    window.location.reload();              
+                  })
+                  .catch(error => console.log('error', error));
+                this.state.formData = {
+                  email: "", 
+                  password: "",
+                  confPassword: "",
+                  firstname: "",
+                  lastname: ""
+                };
+              }
+          }
+        )
         .catch(error => console.log('error', error));
         
     },
@@ -147,12 +161,18 @@ export default new Vuex.Store({
       fetch("http://localhost:3000/api/auth/login", requestOptions)
         .then(response => response.text())
         .then(result => {
-          console.log(result);
-          localStorage.setItem('User', result);
-          router.push({name: 'AllGifs'})
-          location.reload();
+          const parsedResult = JSON.parse(result);
+          if(parsedResult.error){
+            window.alert(parsedResult.error);
+          } else {
+            localStorage.setItem('User', result);
+            router.push({name: 'AllGifs'})
+            window.location.reload();
+          }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => {
+          console.error(error);
+        });
     },
 
     postGif() {
@@ -401,7 +421,10 @@ export default new Vuex.Store({
       
       fetch("http://localhost:3000/api/auth/admin/users", requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
+        .then(result => {
+          console.log(result);
+          this.state.allUsers = JSON.parse(result);
+        })
         .catch(error => console.log('error', error));
     }
     

@@ -3,14 +3,14 @@
         <h2 class="post__title">Poster un commentaire :</h2>
         <div class="post__input">
             <textarea  class="post__input__text" name="comment" id="comment" cols="30" rows="10" @change="modifyComData" v-model="text" @click="clearText"></textarea>
-            <Bouton class="post__input__button" text="Poster" v-on:submit="postCom"/>
+            <Bouton class="post__input__button" text="Poster" v-on:submit="postCom" :valid="comData.text === ''"/>
         </div>
     </div>
 </template>
 
 <script>
 import Bouton from '../components/Bouton.vue';
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
     components: {
@@ -29,6 +29,9 @@ export default {
         clearText(){
             this.text = "";
         }
+    },
+    computed: {
+        ...mapState(['comData']),
     }
 }
 </script>

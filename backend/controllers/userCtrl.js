@@ -16,7 +16,7 @@ exports.signup = (req, res, next) => {
                 password: hash,
                 isDisabled: false
             }).then(user => res.status(201).json({ message: 'Utilisateur créé !'}))
-              .catch(error => res.status(400).json({ error }));
+              .catch(error => res.status(400).json({ error: 'Email déjà utilisée !' }));
         })
         .catch(error => res.status(500).json({ error }));
 };
@@ -57,7 +57,7 @@ exports.login = (req, res, next) => {
 
 //Route pour récupérer tout les utilisateur, utilisable par l'admin
 exports.getAllUsers = (req, res, next) => {
-    User.findAll()
+    User.findAll({ where: {rank: 0}})
         .then(users => res.status(200).json(users))
         .catch(error => res.status(500).json({ error }));
 };
@@ -73,7 +73,7 @@ exports.disableUser = (req, res, next) => {
         }
     )
     .then(() => {
-        if(req.body.isDisabled){
+        if(req.body.isDisabled == true){
             res.status(200).json({ message: 'Utilisateur désactivé !'})
         } else {
             res.status(200).json({ message: 'Utilisateur activé !'})

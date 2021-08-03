@@ -74,6 +74,7 @@ export default {
         display: flex;
         justify-content: center;
         flex-direction: column;
+        margin: auto;
         gap: 20px;
         &__email, &__password, &__firstname, &__lastname, &__confPassword{
             display: flex;
@@ -107,6 +108,7 @@ export default {
     }
 
     input {
+        display: flex;
         width: 400px;
         height: 30px;
         font-size: 1.2em;
@@ -135,5 +137,31 @@ export default {
         height: 100%;
         color: #FD2D01;
         font-weight: bold;
+    }
+    @media (max-width: 425px){
+        input{
+            width: 300px;
+        }
+        label{
+            justify-content: center;
+            width: 200px;
+        }
+        .label{
+            width: 200px;
+            flex-direction: column;
+            justify-content: center;
+        }
+        p{
+            margin-top: 0;
+        }
+        .form__confPassword{
+            justify-content: center;
+            &__label{
+                width: 225px;
+            }
+            &__error{
+                width: 200px;
+            }
+        }
     }
 </style>

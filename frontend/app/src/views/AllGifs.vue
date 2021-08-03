@@ -40,7 +40,8 @@ export default {
   .cardDiv{
     margin: 0;    
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 20px;
     flex-wrap: wrap;
     &__link{
       text-decoration: none;

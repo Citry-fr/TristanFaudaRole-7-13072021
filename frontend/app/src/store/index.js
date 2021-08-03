@@ -179,7 +179,10 @@ export default new Vuex.Store({
         .then(result => {
           console.log(result);
           router.push({name: 'AllGifs'});
-          this.state.gifData = "";
+          this.state.gifData = {
+            name: "",
+            gif: ""
+          };
         })
         .catch(error => console.log('error', error));
     },
@@ -379,10 +382,28 @@ export default new Vuex.Store({
         .then(response => response.text())
         .then(result => {
           console.log(result);
-          this.state.pendingComs = result;
+          this.state.pendingComs = JSON.parse(result);
         })
         .catch(error => console.log('error', error));
     },
+
+    getAllUsers(){
+
+      const user = JSON.parse(localStorage.getItem('User'))
+      const myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${user.token} ${user.userId}`);
+
+      var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+      
+      fetch("http://localhost:3000/api/auth/admin/users", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+    }
     
     
   },

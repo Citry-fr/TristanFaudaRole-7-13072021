@@ -107,7 +107,6 @@ export default {
     position: absolute;
     display: flex;
     margin-left: 10%;
-    position: fixed;
     text-decoration: none;
     font-weight: bold;
     font-size: 1.3em;

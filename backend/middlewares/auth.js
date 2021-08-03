@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 module.exports = (req, res, next) => {
     try {
         const token = req.headers.authorization.split(' ')[1];
-        const decodedToken = jwt.verify(token, 'needToChangeThis');
+        const decodedToken = jwt.verify(token, process.env.TK);
         const userId = decodedToken.userId;
         const rank = decodedToken.rank;
         const locUser = parseInt(req.headers.authorization.split(' ')[2]);

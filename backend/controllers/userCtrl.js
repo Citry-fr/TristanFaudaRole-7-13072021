@@ -44,7 +44,7 @@ exports.login = (req, res, next) => {
                                 userId: user.id,
                                 rank: user.rank
                             },
-                            'needToChangeThis',
+                            process.env.TK,
                             {expiresIn: '24h'}
                         )
                     });

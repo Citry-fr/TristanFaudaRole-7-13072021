@@ -288,22 +288,24 @@ export default new Vuex.Store({
 
     deleteGif() {
 
-      var requestOptions = {
-        method: 'DELETE',
-        headers: myHeaders,
-        body: JSON.stringify({
-          userId: user.userId,
-        }),
-        redirect: 'follow'
-      };
-      const gifId = this.state.oneGif.id
-      fetch(`http://localhost:3000/api/gif/${gifId}/`, requestOptions)
-        .then(response => response.text())
-        .then(result => {
-          console.log(result);
-          router.push({name: 'AllGifs'});
-        })
-        .catch(error => console.log('error', error));
+      if(confirm('Êtes-vous sûr ?')){
+        var requestOptions = {
+          method: 'DELETE',
+          headers: myHeaders,
+          body: JSON.stringify({
+            userId: user.userId,
+          }),
+          redirect: 'follow'
+        };
+        const gifId = this.state.oneGif.id
+        fetch(`http://localhost:3000/api/gif/${gifId}/`, requestOptions)
+          .then(response => response.text())
+          .then(result => {
+            console.log(result);
+            router.push({name: 'AllGifs'});
+          })
+          .catch(error => console.log('error', error));
+      }      
     },    
 
     getOneCom(){

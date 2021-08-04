@@ -53,31 +53,31 @@ export default {
   methods: {
     ...mapActions(['getOneGif', 'deleteGif', 'deleteCom']),
     deleteCom(comId){
-      const user = JSON.parse(localStorage.getItem('User'))
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization", `Bearer ${user.token} ${user.userId}`);
-      myHeaders.append("Content-Type", "application/json");
 
-      var raw = JSON.stringify({
-        "userId": 1
-      });
+      if(confirm('Êtes-vous sûr ?')){
+        const user = JSON.parse(localStorage.getItem('User'))
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${user.token} ${user.userId}`);
+        myHeaders.append("Content-Type", "application/json");
 
-      var requestOptions = {
-        method: 'DELETE',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-      };
+        var raw = JSON.stringify({
+          "userId": 1
+        });
 
-      console.log(comId);
-
-      fetch(`http://localhost:3000/api/com/${comId}`, requestOptions)
-        .then(response => response.text())
-        .then(result => {
-          console.log(result);
-          window.location.reload();
-        })
-        .catch(error => console.log('error', error));
+        var requestOptions = {
+          method: 'DELETE',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+        };
+        fetch(`http://localhost:3000/api/com/${comId}`, requestOptions)
+          .then(response => response.text())
+          .then(result => {
+            console.log(result);
+            window.location.reload();
+          })
+          .catch(error => console.log('error', error));
+      }      
     },
   },
   computed: {

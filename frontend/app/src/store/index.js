@@ -4,6 +4,15 @@ import router from '../router';
 
 Vue.use(Vuex)
 
+let user = 0;
+const myHeaders = new Headers();
+
+if(localStorage.getItem('User') !== null){
+  user = JSON.parse(localStorage.getItem('User'));
+  myHeaders.append("Authorization", `Bearer ${user.token} ${user.userId}`);
+}
+
+
 export default new Vuex.Store({
   state: {
     formData: {
@@ -176,10 +185,6 @@ export default new Vuex.Store({
     },
 
     postGif() {
-      const user = JSON.parse(localStorage.getItem('User'))
-      const myHeaders = new Headers();
-      myHeaders.append("Authorization", `Bearer ${user.token} ${user.userId}`);
-
       const formData = new FormData();
 
       formData.append("gif", this.state.gifData.gif);
@@ -209,9 +214,6 @@ export default new Vuex.Store({
 
     getAllGifs() {
       if(localStorage.getItem('User') !== null){
-      const user = JSON.parse(localStorage.getItem('User'))
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization", `Bearer ${user.token}`);
 
       var requestOptions = {
         method: 'GET',
@@ -231,9 +233,6 @@ export default new Vuex.Store({
     },
 
     getOneGif(){
-      const user = JSON.parse(localStorage.getItem('User'))
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization", `Bearer ${user.token}`);
 
       var requestOptions = {
         method: 'GET',
@@ -255,9 +254,7 @@ export default new Vuex.Store({
     },
 
     postCom(){
-      const user = JSON.parse(localStorage.getItem('User'))
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization", `Bearer ${user.token} ${user.userId}`);
+
       myHeaders.append("Content-Type", "application/json");
 
       var raw = JSON.stringify({
@@ -284,9 +281,6 @@ export default new Vuex.Store({
     },
 
     deleteGif() {
-      const user = JSON.parse(localStorage.getItem('User'))
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization", `Bearer ${user.token} ${user.userId}`);
 
       var requestOptions = {
         method: 'DELETE',
@@ -307,9 +301,6 @@ export default new Vuex.Store({
     },    
 
     getOneCom(){
-      const user = JSON.parse(localStorage.getItem('User'));
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization", `Bearer ${user.token}`);
 
       var requestOptions = {
         method: 'GET',
@@ -330,9 +321,6 @@ export default new Vuex.Store({
     },
 
     modifyCom(){
-      const user = JSON.parse(localStorage.getItem('User'));
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization", `Bearer ${user.token} ${user.userId}`);
       myHeaders.append("Content-Type", "application/json");
 
       var raw = JSON.stringify({
@@ -358,9 +346,6 @@ export default new Vuex.Store({
     },
 
     modifyGif() {
-      const user = JSON.parse(localStorage.getItem('User'))
-      const myHeaders = new Headers();
-      myHeaders.append("Authorization", `Bearer ${user.token} ${user.userId}`);
 
       const formData = new FormData();
 
@@ -388,9 +373,6 @@ export default new Vuex.Store({
     },
 
     getPendingComs(){
-      const user = JSON.parse(localStorage.getItem('User'))
-      const myHeaders = new Headers();
-      myHeaders.append("Authorization", `Bearer ${user.token} ${user.userId}`);
 
       var requestOptions = {
         method: 'GET',
@@ -408,11 +390,6 @@ export default new Vuex.Store({
     },
 
     getAllUsers(){
-
-      const user = JSON.parse(localStorage.getItem('User'))
-      const myHeaders = new Headers();
-      myHeaders.append("Authorization", `Bearer ${user.token} ${user.userId}`);
-
       var requestOptions = {
         method: 'GET',
         headers: myHeaders,

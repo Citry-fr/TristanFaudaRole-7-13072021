@@ -12,6 +12,9 @@
 </template>
 
 <script>
+/*
+    Composant commentaire qui affiche le commentaire avec des fonctionnalité supplémentaire suivant l'utilisateur qui le regarde
+*/
 export default {
     name: 'Comment',
     props: {

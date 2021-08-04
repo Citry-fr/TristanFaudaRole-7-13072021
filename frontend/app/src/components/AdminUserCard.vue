@@ -10,6 +10,9 @@
 </template>
 
 <script>
+
+// Composant pour afficher tout les utilisateur du site dans la partie Admin
+
 export default {
   name: 'AdminUserCard',
   props: {

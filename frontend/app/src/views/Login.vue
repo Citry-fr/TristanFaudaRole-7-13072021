@@ -8,12 +8,14 @@
 
 <script>
 
+// Views qui contient le formulaire de connection
+
 import LoginForm from '../components/LoginForm.vue';
 import Bouton from '../components/Bouton.vue';
 import { mapState, mapActions } from 'vuex'
 
 export default {
-    name: "Login",
+    name: 'Login',
     components: {
         LoginForm,
         Bouton

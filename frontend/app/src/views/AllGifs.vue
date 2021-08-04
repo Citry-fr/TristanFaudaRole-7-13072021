@@ -13,6 +13,9 @@
 </template>
 
 <script>
+
+// Views qui affiche tout les gifs présent dans la BDD
+
 import GifCard from '../components/GifCard.vue';
 import { mapActions, mapState } from 'vuex';
 

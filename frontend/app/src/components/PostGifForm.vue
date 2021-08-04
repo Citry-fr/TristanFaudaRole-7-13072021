@@ -14,9 +14,14 @@
 
 <script>
 
+/*
+    Formulaire pour poster un gif sur le site
+*/
+
 import { mapState } from 'vuex';
 
 export default {
+    name: 'PostGifForm',
     methods: {
         modifyGifData(e) {
             this.$store.commit('MODIFY_GIF_DATA', {

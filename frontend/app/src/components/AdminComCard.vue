@@ -1,4 +1,4 @@
-<template>
+<template> 
   <div class="card">
       <p class="card__name">{{`${firstname} ${lastname}`}}</p>
       <p class="card__com">{{com}}</p>
@@ -10,6 +10,9 @@
 </template>
 
 <script>
+
+// Composant pour afficher afficher les commentaire et permettre au Admin de les valider ou supprimer
+
 export default {
   name: 'AdminComCard',
   props: {

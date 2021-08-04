@@ -12,6 +12,8 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.config.productionTip = false
 
+// Fichier de configuration de vue et importation d'une icone FontAwesome
+
 new Vue({
   router,
   store,

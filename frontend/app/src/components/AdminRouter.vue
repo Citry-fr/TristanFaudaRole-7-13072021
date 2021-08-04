@@ -10,8 +10,11 @@
 </template>
 
 <script>
-export default {
 
+// Composant router pour la partie Admin
+
+export default {
+ name: 'AdminRouter'
 }
 </script>
 

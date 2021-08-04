@@ -4,6 +4,12 @@ import router from '../router';
 
 Vue.use(Vuex)
 
+/*
+  Store vuex ou toutes les données son stocké et ou les fetch sont fait
+*/
+
+
+// Définition des Headers pour les fetchs
 let user = 0;
 const myHeaders = new Headers();
 

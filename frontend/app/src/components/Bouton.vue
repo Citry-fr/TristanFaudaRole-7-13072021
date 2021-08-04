@@ -6,6 +6,10 @@
 
 <script>
 
+/* 
+    Composant Bouton qui est appeller a divers endroit dans l'app avec des props et une fonctions
+    qui peut lui être définie
+*/
 export default {
     name: 'Bouton',
     props: {

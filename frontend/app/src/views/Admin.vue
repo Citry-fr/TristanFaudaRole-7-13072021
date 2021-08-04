@@ -11,9 +11,13 @@
 </template>
 
 <script>
+
+// View Admin avec explication de l'interface
+
 import AdminRouter from '../components/AdminRouter.vue';
 
 export default {
+    name: 'Admin',
     components: {
         AdminRouter
     }

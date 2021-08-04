@@ -13,6 +13,8 @@ import ModifGif from '../views/ModifGif.vue';
 
 Vue.use(VueRouter)
 
+//Définition des différentes route vue utilisé pas l'application
+
 const routes = [
   {
     path: '/',

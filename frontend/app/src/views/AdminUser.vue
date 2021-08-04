@@ -18,21 +18,25 @@
 </template>
 
 <script>
+
+// View qui affiche tout les utilisateur présent dans la BDD et permet au admin des les gérer
+
 import AdminRouter from '../components/AdminRouter.vue';
 import AdminUserCard from '../components/AdminUserCard.vue';
 
 import { mapActions, mapState } from 'vuex';
 
 const myHeaders = new Headers();
-//const user = 0;
+let user = 0;
 
 if(localStorage.getItem('User') !== null){
-    const user = JSON.parse(localStorage.getItem('User'));    
+    user = JSON.parse(localStorage.getItem('User'));    
     myHeaders.append("Authorization", `Bearer ${user.token}`);
     myHeaders.append("Content-Type", "application/json");
 }
 
 export default {
+    name: 'AdminUser',
     components: {
         AdminRouter,
         AdminUserCard

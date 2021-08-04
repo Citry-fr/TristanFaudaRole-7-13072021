@@ -14,6 +14,9 @@
 </template>
 
 <script>
+/*
+    Composant qui affiche les gif sur la page allGifs, elle montre le créateur du gif, son nom ainsi que le nombre de commentaire validé pour le gif
+*/
 export default {
     name: 'GifCard',
     props :{

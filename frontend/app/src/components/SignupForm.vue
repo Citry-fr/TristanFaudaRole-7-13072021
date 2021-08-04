@@ -46,6 +46,10 @@
 
 <script>
 
+/* 
+    Formulaire d'inscription sur le site avec de la validation de données
+*/
+
 import { mapState } from 'vuex';
 
 export default {

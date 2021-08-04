@@ -8,6 +8,8 @@
 
 <script>
 
+// View qui affiche le formulaire pour s'inscrire sur le site
+
 import SignupForm from '../components/SignupForm.vue';
 import Bouton from '../components/Bouton.vue';
 

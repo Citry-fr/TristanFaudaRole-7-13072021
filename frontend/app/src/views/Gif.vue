@@ -32,11 +32,15 @@
 </template>
 
 <script>
+
+// View qui affiche un gif en particulier avec tout les commentaire qui lui sont lié
+
 import Comment from '../components/Comment.vue';
 import PostComment from '../components/PostComment.vue';
 import {mapActions, mapState} from 'vuex';
 
 export default {
+  name: 'Gif',
   components: {
     Comment,
     PostComment

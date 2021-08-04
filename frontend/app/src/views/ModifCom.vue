@@ -5,11 +5,14 @@
 </template>
 
 <script>
+
+// View qui affiche le forumlaire pour permettre la modification de commentaire
+
 import {mapActions} from 'vuex';
 import ModifCom from '../components/ModifCom.vue'
 
-
 export default {
+    name: 'ModifCom',
     components: {
         ModifCom
     },

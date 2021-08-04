@@ -9,10 +9,16 @@
 </template>
 
 <script>
+
+/*
+    Formulaire pour modifier un commentaire
+*/
+
 import Bouton from '../components/Bouton.vue';
 import { mapActions, mapState } from 'vuex'
 
 export default {
+    name: 'ModifCom',
     components: {
         Bouton
     },

@@ -129,8 +129,10 @@ span{
 
 <script>
 
-const ADMIN_RANK = 1;
+// Fichier principale de l'app présent sur tout les view qui contient la barre de navigation du site
 
+// Constante utiliser pour l'affichage de la nav Admin si l'utilisateur est un admin
+const ADMIN_RANK = 1;
 
 export default {
   methods: {

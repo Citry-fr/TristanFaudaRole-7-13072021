@@ -12,6 +12,8 @@
 
 <script>
 
+// View qui affiche le formulaire pour poster un gif
+
 import PostGifForm from '../components/PostGifForm.vue'
 import Bouton from '../components/Bouton.vue'
 

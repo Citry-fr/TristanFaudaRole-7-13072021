@@ -14,9 +14,14 @@
 
 <script>
 
+/*
+    Formulaire pour modifier un gif
+*/
+
 import { mapState } from 'vuex';
 
 export default {
+    name: 'ModifGifForm',
     methods: {
         modifyGifName(e) {
             this.$store.commit('MODIF_GIF_NAME', {

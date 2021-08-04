@@ -17,6 +17,9 @@
 </template>
 
 <script>
+
+// Views qui affiche tout les commentaire du site qui sont en attentes de validation
+
 import AdminRouter from '../components/AdminRouter.vue';
 import AdminComCard from '../components/AdminComCard.vue';
 import { mapActions, mapState } from 'vuex';
@@ -32,6 +35,7 @@ if(localStorage.getItem('User') !== null){
 
 
 export default {
+    name: 'AdminComment',
     components: {
         AdminRouter,
         AdminComCard

@@ -9,10 +9,16 @@
 </template>
 
 <script>
+
+/*
+    Composant qui contient une textarea et un bouton pour poster un commentaire sur un gif
+*/
+
 import Bouton from '../components/Bouton.vue';
 import { mapActions, mapState } from 'vuex'
 
 export default {
+    name: 'PostComment',
     components: {
         Bouton
     },

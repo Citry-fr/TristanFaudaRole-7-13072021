@@ -18,9 +18,14 @@
 
 <script>
 
+/*
+    Composant formulaire de connection qui contient deux champ input et qui modifie les données dans le store
+*/
+
 import { mapState } from 'vuex';
 
 export default {
+    name: 'LoginForm',
     methods: {
         modifyLoginData(e) {
             this.$store.commit('MODIFY_LOGIN_DATA', {

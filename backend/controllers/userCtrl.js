@@ -1,9 +1,10 @@
-//Importation de bcrypt et jsonwebtoken
+//Importation de bcrypt et jsonwebtoken et de filesystem
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 
 //Importation du model User
-const {User} = require('../sequelize');
+const {User, Gif, Comment} = require('../sequelize');
 
 //Route création d'un utilisateur
 exports.signup = (req, res, next) => {    
@@ -83,12 +84,37 @@ exports.disableUser = (req, res, next) => {
 };
 
 exports.deleteUser = (req, res, next) => {
-    User.destroy({
+    Comment.destroy({
         where: {
-            id: req.params.id,
-            isDisabled: true
+            userId: req.params.id
         }
     })
-    .then(() => res.status(200).json({ message: "Utilisateur supprimé !"}))
+    .then(() => res.status(200).json({ message: "Commentaires supprimé !"}))
     .catch(error => res.status(404).json({ error }));
+    Gif.findAll({
+        where: {userId: req.params.id}
+    })
+        .then(gifs => {
+            for (const gif in gifs) {
+                console.log(gifs[gif].dataValues);
+                Comment.destroy({where: {gifId: gifs[gif].dataValues.id}})
+                const filename = gifs[gif].dataValues.gifUrl.split('/images/')[1];
+                    fs.unlink(`images/${filename}`, () => {
+                        Gif.destroy({where: {userId: req.params.id}})
+                            .then(() => {
+                                User.destroy({
+                                    where: {
+                                        id: req.params.id,
+                                        isDisabled: true
+                                    }
+                                })
+                                .then(() => res.status(200).json({ message: "Utilisateur supprimé !"}))
+                                .catch(error => res.status(404).json({ error }));
+                            })
+                            .catch(error => res.status(500).json({ error }));
+                    });
+            }
+            
+        })
+        .catch(error => res.status(500).json({ error }));
 }

@@ -29,3 +29,19 @@ node server
 ```
 
 Le serveur back-end est maintenant lancé à l'adresse : http://localhost:3308/
+
+## Pour effectuer des tests
+
+Pour effectuer des test avec l'application, renommer le fichier **.env.example** en **.env** dans le backend.
+
+Remplissez le fichier **.env** avec les éléments suivants :
+
+```
+DB_NAME=groupomania
+DB_USER=root
+DB_HOST=localhost
+DB_DIALECT=mysql
+DB_PORT=3308
+
+TK=49be7812dc94c6bb095fee2391615336
+```
